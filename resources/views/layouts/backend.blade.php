@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="_token" content="{{ csrf_token() }}"/>
     <title>@yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -17,6 +18,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/skins/_all-skins.min.css') }}">
+
+    @yield('stylesheet')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -127,7 +130,7 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('uploads/images/moell.jpg') }}" class="user-image" alt="User Image">
-                            <span class="hidden-xs">{{ $user->name }}</span>
+                            <span class="hidden-xs"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -179,14 +182,14 @@
                     <img src="{{ asset('uploads/images/moell.jpg') }}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>{{ $user->name }}</p>
+                    <p></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
             <ul class="sidebar-menu">
                 <li class="header">博客导航</li>
                 <li class="active treeview">
-                    <a href="{{ url('background') }}">
+                    <a href="{{ url('backend') }}">
                         <i class="fa fa-home"></i> <span>Home</span>
                     </a>
                 </li>
@@ -197,21 +200,20 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 文章管理</a></li>
-                        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 草稿</a></li>
-                        <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 文章发布</a></li>
-                        <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 分类</a></li>
+                        <li><a href="{{ url('backend/article') }}">文章管理</a></li>
+                        <li><a href="{{ url('backend/article/create') }}">发布文章</a></li>
+                        <li><a href="{{ url('backend/category') }}">文章分类</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="pages/widgets.html">
+                    <a href="{{ url('backend/tag') }}">
                         <i class="fa fa-tags"></i> <span>标签</span>
                     </a>
                 </li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-navicon"></i>
-                        <span>导航管理</span>
+                        <span>导航</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
@@ -224,27 +226,21 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
-                        <span>用户管理</span>
+                        <span>用户</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                        <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                        <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                        <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                        <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                        <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+                        <li><a href="{{ url('backend/user') }}">用户管理</a></li>
+                        <li><a href="{{ url('backend/user/create') }}">用户添加</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-cog"></i> <span>博客设置</span>
+                        <i class="fa fa-cog"></i> <span>设置</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/forms/general.html"> General Elements</a></li>
-                        <li><a href="pages/forms/advanced.html"> Advanced Elements</a></li>
-                        <li><a href="pages/forms/editors.html">Editors</a></li>
+                        <li><a href="{{ url('backend/setting') }}">博客设置</a></li>
                     </ul>
                 </li>
 
@@ -257,14 +253,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-                Dashboard
-                <small>Control panel</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
+            @yield('header')
         </section>
         <section class="content">
             @yield('content')
@@ -289,5 +278,10 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('AdminLTE/dist/js/app.min.js') }}"></script>
 
+<script src="{{ asset('layer/layer.js') }}" ></script>
+
+<script src="{{ asset('js/moell-blog.js') }}" ></script>
+
+@yield('javascript')
 </body>
 </html>
