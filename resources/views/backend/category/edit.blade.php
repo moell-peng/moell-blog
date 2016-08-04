@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-solid">
-                <form role="form" method="post" action="{{ url('backend/article') }}">
+                <form role="form" method="post" action="{{ url('backend/article') }}" id="category-form">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="title">分类名称</label>
@@ -40,7 +40,7 @@
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">确定</button>
-                        <button type="reset" class="btn btn-warning">重置</button>
+                        <button type="button" class="btn btn-warning" id="reset-btn">重置</button>
                     </div>
                 </form>
             </div>

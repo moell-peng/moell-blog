@@ -18,7 +18,7 @@
         <div class="col-md-12">
             <div class="box box-solid">
 
-                <form role="form" method="post" action="{{ url('backend/article') }}">
+                <form role="form" method="post" action="{{ url('backend/article') }}" id="article-form">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="title">标题</label>
@@ -36,12 +36,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title">文章分类</label>
+                            <label for="cate_id">文章分类</label>
                             <div class="row">
                                 <div class='col-md-6'>
-                                    <select id='cate_id' class='form-control'>
+                                    <select id='cate_id' name="cate_id" class='form-control'>
                                         <option value=''>请选择</option>
-                                        <option value=''>请选择</option>
+                                        <option value='d'>请选择</option>
                                     </select>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">发布</button>
-                        <button type="reset" class="btn btn-warning">重置</button>
+                        <button type="button" id="reset-btn" class="btn btn-warning">重置</button>
                     </div>
                 </form>
 
