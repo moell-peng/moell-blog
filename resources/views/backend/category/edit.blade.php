@@ -26,10 +26,8 @@
                             <label for="title">上级分类</label>
                             <div class="row">
                                 <div class='col-md-6'>
-                                    <select id='cate_id' class='form-control'>
-                                        <option value=''>请选择</option>
-                                        <option value=''>请选择</option>
-                                    </select>
+                                    @inject('category', 'App\Presenters\CategoryPresenter')
+                                    {!! $category->getSelect(0, '顶级分类') !!}
                                 </div>
                             </div>
                         </div>

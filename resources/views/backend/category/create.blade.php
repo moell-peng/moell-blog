@@ -10,26 +10,30 @@
 
 @section('content')
     <div class="row">
+            <ul >
+                {{ $errors->first('name') }}
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         <div class="col-xs-12">
             <div class="box box-solid">
-                <form role="form" method="post" action="{{ url('backend/article') }}" id="category-form">
+                <form role="form" method="post" action="{{ url('backend/category') }}" id="category-form">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="title">分类名称</label>
+                            <label for="name">分类名称</label>
                             <div class="row">
                                 <div class='col-md-6'>
-                                    <input type='text' class='form-control' name="title" id='title' placeholder='请输入分类名称'>
+                                    <input type='text' class='form-control' name="name" id='name' placeholder='请输入分类名称'>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title">上级分类</label>
+                            <label for="cate_id">上级分类</label>
                             <div class="row">
                                 <div class='col-md-6'>
-                                    <select id='cate_id' class='form-control'>
-                                        <option value=''>请选择</option>
-                                        <option value=''>请选择</option>
-                                    </select>
+                                    @inject('category', 'App\Presenters\CategoryPresenter')
+                                    {!! $category->getSelect(0, '顶级分类') !!}
                                 </div>
                             </div>
                         </div>

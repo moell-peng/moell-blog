@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Repositories\CategoryRepositoryEloquent;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Category;
+use App\Models\Category;
+use App\Http\Requests\Backend\Category\CreateRequest;
+use App\Http\Requests\Backend\Category\UpdateRequest;
 
 class CategoryController extends Controller
 {
+    protected $category;
+
+    public function __construct(CategoryRepositoryEloquent $category)
+    {
+        $this->category = $category;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +27,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::getNestedList('name', null, '&nbsp;&nbsp;&nbsp;&nbsp;');
+        /*$root = Category::create(['name' => 'Root category2']);
+        $child1 = $root->children()->create(['name' => 'Child 1']);
+
+        // with the `makeChildOf` method
+        $child2 = Category::create(['name' => 'Child 2']);
+        $child2->makeChildOf($root);
+        exit();*/
+        $category = $this->category->getNestedList();
         return view("backend.category.index", compact('category'));
     }
 
@@ -37,9 +54,9 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        dd($request);
     }
 
     /**
