@@ -24,14 +24,8 @@ class CreateRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'name.required' => '请填写分类名称'
+            'title' => 'required|min:5',
+            'content' => 'required'
         ];
     }
 }

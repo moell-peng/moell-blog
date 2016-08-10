@@ -24,7 +24,9 @@ $(function() {
         }
     });
 
-    Moell.form.reset('#category-form', '#reset-btn');
+    $("#category-form #reset-btn").click(function(){
+        $('#category-form').data('bootstrapValidator').resetForm(true);
+    });
 
     /* 文章操作验证 */
     $("#article-form").bootstrapValidator({
@@ -47,5 +49,9 @@ $(function() {
         }
     });
 
-    Moell.form.reset('#article-form', '#reset-btn');
+    $("#article-form #reset-btn").click(function(){
+        $('#article-form').data('bootstrapValidator').resetForm(true);
+    });
+
+
 });

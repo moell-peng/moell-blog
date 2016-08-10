@@ -10,12 +10,13 @@
 
 @section('content')
     <div class="row">
-            <ul >
-                {{ $errors->first('name') }}
+        @if($errors->any())
+            <ul class="alert alert-danger">
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
+        @endif
         <div class="col-xs-12">
             <div class="box box-solid">
                 <form role="form" method="post" action="{{ url('backend/category') }}" id="category-form">

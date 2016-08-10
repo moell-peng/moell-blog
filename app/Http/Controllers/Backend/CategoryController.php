@@ -78,7 +78,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.category.edit');
+        $category = $this->category->find($id);
+        return view('backend.category.edit', compact('category'));
     }
 
     /**
@@ -88,7 +89,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         //
     }

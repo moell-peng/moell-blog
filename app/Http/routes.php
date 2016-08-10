@@ -11,22 +11,21 @@
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('home');
-});*/
+});
 
-Route::group(['prefix'=>'backend', 'middleware' => ['web']], function(){
+Route::group(['prefix'=>'backend'], function(){
 
     Route::get('/login', 'Backend\AuthController@showLoginForm');
     Route::post('/login', 'Backend\AuthController@login');
-    Route::get('/loginout', 'Backend\AuthController@logout');
+    Route::get('/logout', 'Backend\AuthController@logout');
     /*Route::get('/register', 'Backend\AuthController@getRegister');
     Route::post('/register', 'Backend\AuthController@postRegister');*/
 
-    Route::group(['middleware' => ['auth']], function(){
+   Route::group(['middleware' => ['auth']], function(){
         Route::get('/', 'Backend\HomeController@index');
         Route::resource('article', 'Backend\ArticleController');
         Route::resource('category', 'Backend\CategoryController');
     });
 });
-

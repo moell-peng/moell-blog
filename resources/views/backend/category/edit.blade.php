@@ -10,15 +10,22 @@
 
 @section('content')
     <div class="row">
+        @if($errors->any())
+            <ul class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
         <div class="col-xs-12">
             <div class="box box-solid">
-                <form role="form" method="post" action="{{ url('backend/article') }}" id="category-form">
+                <form role="form" method="post" action="{{ route('backend.category.update', ['id' => $category->id]) }}" id="category-form">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="title">分类名称</label>
+                            <label for="name">分类名称</label>
                             <div class="row">
                                 <div class='col-md-6'>
-                                    <input type='text' class='form-control' name="title" id='title' placeholder='请输入分类名称'>
+                                    <input type='text' value="{{ $category->name }}" class='form-control' name="name" id='name' placeholder='请输入分类名称'>
                                 </div>
                             </div>
                         </div>
@@ -26,15 +33,15 @@
                             <label for="title">上级分类</label>
                             <div class="row">
                                 <div class='col-md-6'>
-                                    @inject('category', 'App\Presenters\CategoryPresenter')
-                                    {!! $category->getSelect(0, '顶级分类') !!}
+                                    @inject('categoryPresenter', 'App\Presenters\CategoryPresenter')
+                                    {!! $categoryPresenter->getSelect($category->id, '顶级分类') !!}
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {{ csrf_field() }}
-
+                    {{ method_field('PUT') }}
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">确定</button>
