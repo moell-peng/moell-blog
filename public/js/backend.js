@@ -14,7 +14,7 @@ $(function() {
     $("#category-form").bootstrapValidator({
         validatorDefaultParam,
         fields: {
-            title: {
+            name: {
                 validators: {
                     notEmpty: {
                         message: "分类名称不能为空"
@@ -24,9 +24,11 @@ $(function() {
         }
     });
 
-    $("#category-form #reset-btn").click(function(){
+    /*$("#category-form #reset-btn").click(function(){
         $('#category-form').data('bootstrapValidator').resetForm(true);
-    });
+        $('#category-form')[0].reset();
+    });*/
+    Moell.form.reset("#category-form", "#reset-btn");
 
     /* 文章操作验证 */
     $("#article-form").bootstrapValidator({
@@ -49,9 +51,11 @@ $(function() {
         }
     });
 
-    $("#article-form #reset-btn").click(function(){
+    /*$("#article-form #reset-btn").click(function(){
         $('#article-form').data('bootstrapValidator').resetForm(true);
-    });
+    });*/
+
+    Moell.form.reset("#article-form", "#reset-btn");
 
 
 });

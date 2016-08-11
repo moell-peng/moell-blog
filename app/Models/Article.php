@@ -10,7 +10,7 @@ class Article extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'article';
+    protected $table = 'articles';
 
     protected $fillable = [];
 

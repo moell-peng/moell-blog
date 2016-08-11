@@ -24,8 +24,14 @@ class CreateRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|min:5',
-            'content' => 'required'
+            'name' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => '分类名不能为空'
         ];
     }
 }

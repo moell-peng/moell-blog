@@ -10,13 +10,7 @@
 
 @section('content')
     <div class="row">
-        @if($errors->any())
-            <ul class="alert alert-danger">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+        @include('backend.alert.warning')
         <div class="col-xs-12">
             <div class="box box-solid">
                 <form role="form" method="post" action="{{ route('backend.category.update', ['id' => $category->id]) }}" id="category-form">
@@ -34,7 +28,7 @@
                             <div class="row">
                                 <div class='col-md-6'>
                                     @inject('categoryPresenter', 'App\Presenters\CategoryPresenter')
-                                    {!! $categoryPresenter->getSelect($category->id, '顶级分类') !!}
+                                    {!! $categoryPresenter->getSelect($category->parent_id, '顶级分类') !!}
                                 </div>
                             </div>
                         </div>
