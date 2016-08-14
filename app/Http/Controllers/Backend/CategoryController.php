@@ -27,13 +27,6 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        /*$root = Category::create(['name' => 'Root category2']);
-        $child1 = $root->children()->create(['name' => 'Child 1']);
-
-        // with the `makeChildOf` method
-        $child2 = Category::create(['name' => 'Child 2']);
-        $child2->makeChildOf($root);
-        exit();*/
         $category = $this->category->getNestedList();
         return view("backend.category.index", compact('category'));
     }
