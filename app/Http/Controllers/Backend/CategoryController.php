@@ -56,7 +56,11 @@ class CategoryController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        dd($request);
+        $result = $this->category->store($request->all());
+        if ($result) {
+            return redirect('backend/category')->with('success', '分类添加成功');
+        }
+        return redirect(route('backend.category.create'))->withErrors('系统异常，分类添加失败');
     }
 
     /**
@@ -91,7 +95,12 @@ class CategoryController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        //
+
+        $result = $this->category->update($request->all(), $id);
+        if ($result) {
+            return redirect('backend/category')->with('success', '分类修改成功');
+        }
+        return redirect(route('backend.category.edit', ['id' => $id]))->withErrors('系统异常，分类修改失败');
     }
 
     /**
