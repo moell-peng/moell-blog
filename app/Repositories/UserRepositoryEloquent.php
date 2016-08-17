@@ -6,7 +6,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\UserRepository;
 use App\Models\User;
-use App\Validators\UserValidator;
 
 /**
  * Class UserRepositoryEloquent
@@ -25,6 +24,37 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     }
 
     
+    public function store(array $input, $avatar){
+
+        $attr['email'] = $input['email'];
+        $attr['password'] = bcrypt($input['password']);
+        $attr['name'] = $input['name'];
+
+        if ($avatar != "") {
+            $attr['user_pic'] = $avatar;
+        }
+        if (parent::create($attr)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updateUser(array $input, $id, $avatar = '')
+    {
+        $attr['email'] = $input['email'];
+        $attr['name'] = $input['name'];
+        if ($input['password'] != "")  {
+            $attr['password'] = bcrypt($input['password']);
+        }
+        if ($avatar != "") {
+            $attr['user_pic'] = $avatar;
+        }
+
+        if (parent::update($attr, $id)) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Boot up the repository, pushing criteria

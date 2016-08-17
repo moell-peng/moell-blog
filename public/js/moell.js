@@ -24,13 +24,5 @@ var _token = $("meta[name='_token']").attr('content');
                 layer.close();
             })
         }
-    },
-    Moell.form = {
-        reset: function (form, resetBtn) {
-            $(resetBtn).click(function () {
-                $(form).data('bootstrapValidator').resetForm(true);
-                $(form)[0].reset();
-            });
-        }
     }
 })(Moell);

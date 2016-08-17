@@ -24,11 +24,11 @@ $(function() {
         }
     });
 
-    /*$("#category-form #reset-btn").click(function(){
-        $('#category-form').data('bootstrapValidator').resetForm(true);
-        $('#category-form')[0].reset();
-    });*/
-    Moell.form.reset("#category-form", "#reset-btn");
+    $("#category-form #reset-btn").click(function(){
+        var categoryForm = $("#category-form");
+        categoryForm.data('bootstrapValidator').resetForm(true);
+        categoryForm[0].reset();
+    });
 
     /* 文章操作验证 */
     $("#article-form").bootstrapValidator({
@@ -51,11 +51,99 @@ $(function() {
         }
     });
 
-    /*$("#article-form #reset-btn").click(function(){
-        $('#article-form').data('bootstrapValidator').resetForm(true);
-    });*/
+    $("#article-form #reset-btn").click(function(){
+        var articleForm = $("#article-form");
+        articleForm.data('bootstrapValidator').resetForm(true);
+        articleForm[0].reset();
+    });
 
-    Moell.form.reset("#article-form", "#reset-btn");
+    /* user add */
+    $("#user-form").bootstrapValidator({
+        validatorDefaultParam,
+        fields : {
+            name : {
+                validators : {
+                    notEmpty : {
+                        message : "请输入姓名"
+                    },
+                    stringLength : {
+                        min : 2,
+                        max : 30,
+                        message : '姓名长度必须在2-30'
+                    }
+                }
+            },
+            email : {
+                validators : {
+                    notEmpty : {
+                        message : "请输入登录邮箱"
+                    },
+                    emailAddress : {
+                        message : "请输入正确的登录邮箱"
+                    }
+                }
+            },
+            password : {
+                validators : {
+                    notEmpty : {
+                        message : "请输入正确的登录密码"
+                    },
+                    stringLength : {
+                        min : 8,
+                        max : 30,
+                        message : '请输入8-30位的密码'
+                    }
+                }
+            }
+        }
+    });
 
+    $("#user-form #reset-btn").click(function(){
+        $("#user-form").data('bootstrapValidator').resetForm(true);
+        $("#user-form")[0].reset();
+    });
+
+    /* user edit */
+    $("#edit-user-form").bootstrapValidator({
+        validatorDefaultParam,
+        fields : {
+            name : {
+                validators : {
+                    notEmpty : {
+                        message : "请输入姓名"
+                    },
+                    stringLength : {
+                        min : 2,
+                        max : 30,
+                        message : '姓名长度必须在2-30'
+                    }
+                }
+            },
+            email : {
+                validators : {
+                    notEmpty : {
+                        message : "请输入登录邮箱"
+                    },
+                    emailAddress : {
+                        message : "请输入正确的登录邮箱"
+                    }
+                }
+            },
+            password : {
+                validators : {
+                    stringLength : {
+                        min : 8,
+                        max : 30,
+                        message : '请输入8-30位的密码'
+                    }
+                }
+            }
+        }
+    });
+
+    $("#edit-user-form #reset-btn").click(function(){
+        $("#user-form").data('bootstrapValidator').resetForm(true);
+        $("#user-form")[0].reset();
+    });
 
 });
