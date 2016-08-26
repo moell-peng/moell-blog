@@ -205,12 +205,24 @@
                         <li><a href="{{ url('backend/article') }}">文章管理</a></li>
                         <li><a href="{{ url('backend/article/create') }}">发布文章</a></li>
                         <li><a href="{{ url('backend/category') }}">文章分类</a></li>
+                        <li><a href="{{ url('backend/tag') }}">文章标签</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="{{ url('backend/tag') }}">
                         <i class="fa fa-tags"></i> <span>标签</span>
                     </a>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-file-image-o"></i>
+                        <span>多媒体</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="pages/charts/chartjs.html">媒体库</a></li>
+                        <li><a href="pages/charts/morris.html">添加</a></li>
+                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">

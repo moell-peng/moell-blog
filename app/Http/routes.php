@@ -28,5 +28,6 @@ Route::group(['prefix'=>'backend'], function(){
         Route::resource('article', 'Backend\ArticleController');
         Route::resource('category', 'Backend\CategoryController');
         Route::resource('user', 'Backend\UserController');
+        Route::resource('tag', 'Backend\TagController');
     });
 });

@@ -146,4 +146,22 @@ $(function() {
         $("#user-form")[0].reset();
     });
 
+    $("#tag-form").bootstrapValidator({
+        validatorDefaultParam,
+        fields : {
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: "请输入文章标签名"
+                    }
+                }
+            }
+        }
+    });
+
+    $("#tag-form #reset-btn").click(function(){
+        $("#tag-form").data('bootstrapValidator').resetForm(true);
+        $("#tag-form")[0].reset();
+    });
+
 });
