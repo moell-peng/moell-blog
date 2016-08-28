@@ -158,7 +158,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-
+        App\Providers\PaginationServiceProvider::class,
     ],
 
     /*
