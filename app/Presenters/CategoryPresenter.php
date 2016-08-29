@@ -38,11 +38,11 @@ class CategoryPresenter extends FractalPresenter
      * @param string $nullText
      * @return string
      */
-    public function getSelect($defaultCategoryId = 0, $nullText = '请选择')
+    public function getSelect($defaultCategoryId = 0, $nullText = '请选择', $nullValue = 0)
     {
         $category = $this->category->getNestedList();
         $select = "<select id='cate_id' name='cate_id' class='form-control'>";
-        $select .= "<option value='0'>--".$nullText."--</option>";
+        $select .= "<option value='".$nullValue."'>--".$nullText."--</option>";
         if ($category) {
             foreach ($category as $key => $value) {
                 $selected = $key == $defaultCategoryId ? " selected " : "";

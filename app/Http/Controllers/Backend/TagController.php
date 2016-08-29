@@ -26,7 +26,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = $this->tag->all();
+        $tags = $this->tag->paginate(15);
         return view('backend.tag.index', compact('tags'));
     }
 
@@ -100,7 +100,7 @@ class TagController extends Controller
         }
         return redirect()
             ->back()
-            ->withErrors('系统异常，标签添加失败');
+            ->withErrors('系统异常，标签修改失败');
     }
 
     /**

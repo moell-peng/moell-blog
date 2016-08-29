@@ -4,6 +4,7 @@ namespace App\Presenters;
 
 use App\Transformers\TagTransformer;
 use Prettus\Repository\Presenter\FractalPresenter;
+use App\Repositories\TagRepositoryEloquent;
 
 /**
  * Class TagPresenter
@@ -12,6 +13,14 @@ use Prettus\Repository\Presenter\FractalPresenter;
  */
 class TagPresenter extends FractalPresenter
 {
+    protected $tag;
+
+    public function __construct(TagRepositoryEloquent $tag)
+    {
+        $this->tag = $tag;
+        parent::__construct();
+    }
+
     /**
      * Transformer
      *
@@ -20,5 +29,19 @@ class TagPresenter extends FractalPresenter
     public function getTransformer()
     {
         return new TagTransformer();
+    }
+
+    public function tagNameList($idList)
+    {
+        $tagName = '';
+        if ($idList != "") {
+            $tags = $this->tag->findWhereIn('id', explode(',', $idList), ['tag_name']);
+            if ($tags) {
+                foreach ($tags as $tag) {
+                    $tagName .= $tag->tag_name.";";
+                }
+            }
+        }
+        return $tagName;
     }
 }

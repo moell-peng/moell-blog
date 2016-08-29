@@ -4,14 +4,14 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\ArticleRepository;
-use App\Models\Article;
+use App\Repositories\ArticleTagRepository;
+use App\Models\ArticleTag;
 
 /**
- * Class ArticleRepositoryEloquent
+ * Class ArticleTagRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class ArticleRepositoryEloquent extends BaseRepository implements ArticleRepository
+class ArticleTagRepositoryEloquent extends BaseRepository implements ArticleTagRepository
 {
     /**
      * Specify Model class name
@@ -20,7 +20,7 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
      */
     public function model()
     {
-        return Article::class;
+        return ArticleTag::class;
     }
 
     
@@ -33,4 +33,8 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    public function getModel()
+    {
+        return $this->model;
+    }
 }

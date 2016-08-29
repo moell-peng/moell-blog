@@ -6,7 +6,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TagRepository;
 use App\Models\Tag;
-use App\Validators\TagValidator;
 
 /**
  * Class TagRepositoryEloquent
@@ -32,5 +31,16 @@ class TagRepositoryEloquent extends BaseRepository implements TagRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function findName($tagName)
+    {
+        $tag = $this->findByField('tag_name', $tagName, ['id', 'tag_name']);
+        $data = [];
+        if (!$tag->isEmpty()) {
+            $tempData = $tag->toArray();
+            $data = $tempData[0];
+        }
+        return $data;
     }
 }

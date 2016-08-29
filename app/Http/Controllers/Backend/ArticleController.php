@@ -7,17 +7,42 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Http\Requests\Backend\Article\CreateRequest;
+use App\Http\Requests\Backend\Article\UpdateRequest;
+use App\Repositories\ArticleRepositoryEloquent;
+use App\Repositories\TagRepositoryEloquent;
+use App\Services\ArticleTagService;
+use App\Services\ArticleService;
 
 class ArticleController extends Controller
 {
+    protected $article;
+
+    protected $tag;
+
+
+    public function __construct(ArticleRepositoryEloquent $article, TagRepositoryEloquent $tag)
+    {
+        $this->article = $article;
+        $this->tag  = $tag;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ArticleService $articleService)
     {
-        return view('backend.article.index');
+        $articles = $this->article->orderBy('id', 'desc')->paginate(15);
+        $category   = [];
+        $author     = [];
+        if ($articles) {
+            $data = $articleService->getArticleUserAndCategory($articles);
+            $category   = $data['category'];
+            $author     = $data['user'];
+        }
+        return view('backend.article.index', compact('articles', 'author', 'category'));
     }
 
     /**
@@ -31,14 +56,28 @@ class ArticleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRequest $request
+     * @param ArticleTagService $articleTagService
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request, ArticleTagService $articleTagService)
     {
-        dd($request->all());
+        $article = $this->article->create([
+            'title' => $request->title,
+            'content'   => $request->get('markdown-content'),
+            'keyword'   => $request->keyword,
+            'desc' => $request->desc,
+            'cate_id'   => $request->cate_id,
+            'user_id'   => Auth::user()->id
+        ]);
+        if ($article) {
+            if ($request->tags != "") {
+                $articleTagService->store($article->id, $request->tags);
+            }
+            return redirect('backend/article')
+                ->with('success', '文章添加成功');
+        }
+        return redirect()->back()->withErrors('系统异常,文章发布失败');
     }
 
     /**
@@ -58,9 +97,12 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, ArticleTagService $articleTagService)
     {
-        //
+        $article = $this->article->find($id);
+        $tags = $article->articleTag;
+        $tagIdList = $articleTagService->tagsIdList($tags, false);
+        return view('backend.article.edit', compact('article', 'tagIdList'));
     }
 
     /**
@@ -70,9 +112,23 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id, ArticleTagService $articleTagService)
     {
-        //
+        $article = $this->article->find($id);
+        if ($article) {
+            $data = [];
+            $data['title']  = $request->title;
+            $data['desc']   = $request->desc;
+            $data['keyword']    = $request->keyword;
+            $data['cate_id']    = $request->cate_id;
+            $data['content']    = $request->get('markdown-content');
+            if ($this->article->update($data, $id)) {
+                $articleTagService->updateArticleTags($id, $request->tags);
+                return redirect('backend/article')
+                    ->with('success', '文章修改成功');
+            }
+        }
+        return redirect()->back()->withErrors('系统异常,修改文章失败');
     }
 
     /**
@@ -83,6 +139,16 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = $this->article->find($id);
+        if ($article) {
+            if ($this->article->delete($id)) {
+                $tags = $article->tags != "" ? explode(',', $article->tags) : "";
+                if (is_array($tags)) {
+                    $this->tag->reduceArticleNumber($tags);
+                }
+                return response()->json(['status' => 0]);
+            }
+        }
+        return response()->json(['status' => 1]);
     }
 }

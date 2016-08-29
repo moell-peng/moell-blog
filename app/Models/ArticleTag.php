@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class Tag extends Model implements Transformable
+class ArticleTag extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['tag_name', 'article_number'];
+    protected $fillable = ['article_id', 'tag_id'];
 
-    protected $table = 'tags';
+    public $timestamps = false;
 
 }

@@ -14,7 +14,6 @@ class AddTagsTable extends Migration
     {
         Schema::table('tags', function (Blueprint $table) {
             $table->timestamps();
-            $table->integer('article_number')->default(0)->comment('文章数量');
         });
     }
 

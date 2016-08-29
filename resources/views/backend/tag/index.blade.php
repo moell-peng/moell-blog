@@ -37,7 +37,10 @@
                                 <tr>
                                     <td>{{ $line }}</td>
                                     <td>{{ $tag->tag_name }}</td>
-                                    <td>{{ $tag->article_number }}</td>
+                                    <td>
+                                        @inject('articleTag', 'App\Presenters\ArticleTagPresenter')
+                                        {{ $articleTag->getArticleNumber($tag->id) }}
+                                    </td>
                                     <td>
                                         <a href='{{ route("backend.tag.edit", ["id" => $tag->id]) }}' class='btn btn-info btn-xs'>
                                             <i class="fa fa-pencil"></i> 修改</a>
@@ -51,6 +54,9 @@
                     </table>
                 </div>
                 <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    {!! $tags->links() !!}
+                </div>
             </div>
             <!-- /.box -->
         </div>
