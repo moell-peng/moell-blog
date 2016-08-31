@@ -205,7 +205,6 @@
                         <li><a href="{{ url('backend/article') }}">文章管理</a></li>
                         <li><a href="{{ url('backend/article/create') }}">发布文章</a></li>
                         <li><a href="{{ url('backend/category') }}">文章分类</a></li>
-                        <li><a href="{{ url('backend/tag') }}">文章标签</a></li>
                     </ul>
                 </li>
                 <li>
@@ -255,6 +254,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('backend/setting') }}">博客设置</a></li>
+                        <li><a href="{{ url('backend/link') }}">友情链接</a></li>
                     </ul>
                 </li>
 

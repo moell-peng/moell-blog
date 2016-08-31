@@ -164,4 +164,32 @@ $(function() {
         $("#tag-form")[0].reset();
     });
 
+    $("#link-form").bootstrapValidator({
+        validatorDefaultParam,
+        fields : {
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: "请输入链接名"
+                    }
+                }
+            },
+            url : {
+                validators: {
+                    notEmpty: {
+                        message: "URL不能为空"
+                    },
+                    uri: {
+                        message: '请输入合法的URL地址'
+                    }
+                }
+            }
+        }
+    });
+
+    $("#link-form #reset-btn").click(function(){
+        $("#link-form").data('bootstrapValidator').resetForm(true);
+        $("#link-form")[0].reset();
+    });
+
 });
