@@ -192,4 +192,32 @@ $(function() {
         $("#link-form")[0].reset();
     });
 
+    $("#navigation-form").bootstrapValidator({
+        validatorDefaultParam,
+        fields : {
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: "请输入导航名"
+                    }
+                }
+            },
+            url : {
+                validators: {
+                    notEmpty: {
+                        message: "URL不能为空"
+                    },
+                    uri: {
+                        message: '请输入合法的URL地址'
+                    }
+                }
+            }
+        }
+    });
+
+    $("#navigation-form #reset-btn").click(function(){
+        $("#navigation-form").data('bootstrapValidator').resetForm(true);
+        $("#navigation-form")[0].reset();
+    });
+
 });

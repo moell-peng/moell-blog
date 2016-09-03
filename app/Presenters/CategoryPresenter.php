@@ -52,6 +52,23 @@ class CategoryPresenter extends FractalPresenter
         $select .= "</select>";
 
         return $select;
+    }
 
+    /**
+     * 获取分类的名称
+     *
+     * @param $categoryId
+     * @return string
+     */
+    public function getIdName($categoryId)
+    {
+        $name = '';
+        if ($categoryId > 0) {
+            $data = $this->category->find($categoryId, ['name']);
+            if ($data) {
+                $name = $data->name;
+            }
+        }
+        return $name;
     }
 }

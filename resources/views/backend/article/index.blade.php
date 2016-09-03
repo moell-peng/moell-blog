@@ -14,16 +14,22 @@
             <div class="box box-solid">
                 @include('backend.alert.success')
                 <div class="box-header">
-                    <h3 class="box-title"></h3>
-                    <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="title">标题</label>&nbsp;
+                            <input name='title' type="text" class="form-control" id="title" placeholder="请输入文章标题">&nbsp;
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="tag">标签</label>&nbsp;
+                            <input name='tag' type="text" class="form-control" id="tag" placeholder="请输入文章标签">
+                        </div>
+                        <div class="form-group">
+                            <label for="cate_id">分类</label>&nbsp;
+                            @inject('categoryPresenter', 'App\Presenters\CategoryPresenter')
+                            {!! $categoryPresenter->getSelect(0, '请选择', '') !!}
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding ">
