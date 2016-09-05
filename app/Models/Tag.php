@@ -14,4 +14,14 @@ class Tag extends Model implements Transformable
 
     protected $table = 'tags';
 
+    /**
+     * tag 与 article 多对多关联
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function article()
+    {
+        return $this->belongsToMany('App\Models\Article','article_tags', 'tag_id', 'article_id');
+    }
+
 }

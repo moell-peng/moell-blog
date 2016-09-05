@@ -15,4 +15,12 @@ class Category extends Node implements Transformable
 
     protected $table = 'categories';
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function article()
+    {
+        return $this->hasOne('App\Models\Article', 'cate_id', 'id');
+    }
+
 }

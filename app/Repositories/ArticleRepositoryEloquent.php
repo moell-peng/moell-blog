@@ -33,4 +33,16 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    /**
+     * 根据关键字搜索文章
+     *
+     * @param $keyword
+     * @return mixed
+     */
+    public function searchKeywordArticle($keyword)
+    {
+        $search = "%".$keyword."%";
+        $this->applyConditions([['title', 'like', $search]]);
+        return $this->paginate(15, ['id','title','desc','user_id','cate_id','read_count','created_at']);
+    }
 }

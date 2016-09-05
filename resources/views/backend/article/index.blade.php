@@ -45,6 +45,8 @@
                             <th>操作</th>
                         </tr>
                         @if ($articles)
+                            @inject('articlePresenter', 'App\Presenters\ArticlePresenter')
+
                             <?php $line = 1 ?>
                             @foreach($articles as $article)
                                 <tr>
@@ -52,7 +54,7 @@
                                     <td>
                                         {{ $author[$article->user_id] }}
                                     </td>
-                                    <td>{{ $article->title }}</td>
+                                    <td>{{ $articlePresenter->formatTitle($article->title) }}</td>
                                     <td>{{ $article->read_count }}</td>
                                     <td>{{ $article->comment_count }}</td>
                                     <td>

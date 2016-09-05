@@ -31,6 +31,12 @@ class TagPresenter extends FractalPresenter
         return new TagTransformer();
     }
 
+    /**
+     * 获取以;分割的标签
+     *
+     * @param $idList
+     * @return string
+     */
     public function tagNameList($idList)
     {
         $tagName = '';
@@ -43,5 +49,15 @@ class TagPresenter extends FractalPresenter
             }
         }
         return $tagName;
+    }
+
+    /**
+     * 获取标签列表
+     *
+     * @return mixed
+     */
+    public function tagList()
+    {
+        return $this->tag->all(['id', 'tag_name']);
     }
 }

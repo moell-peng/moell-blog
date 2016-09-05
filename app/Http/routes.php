@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/article/{id}', ['as' => 'article', 'uses' => 'ArticleController@index']);
+Route::get('/category/{id}', ['as' => 'category', 'uses' => 'CategoryController@index']);
+Route::get('/tag/{id}', ['as' => 'tag', 'uses' => 'TagController@index']);
+Route::get('/search', ['as' => 'search', 'uses' => 'SearchController@index']);
 
 Route::group(['prefix'=>'backend'], function(){
 
