@@ -45,4 +45,19 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
         $this->applyConditions([['title', 'like', $search]]);
         return $this->paginate(15, ['id','title','desc','user_id','cate_id','read_count','created_at']);
     }
+
+    /**
+     * 搜索文章
+     *
+     * @param array $where
+     * @return mixed
+     */
+    public  function backendSearchArticle(array $where)
+    {
+        if (count($where) > 0) {
+            $this->applyConditions($where);
+        }
+
+        return $this->orderBy('id', 'desc')->paginate(15);
+    }
 }

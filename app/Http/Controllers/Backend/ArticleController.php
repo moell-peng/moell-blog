@@ -32,9 +32,10 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ArticleService $articleService)
+    public function index(ArticleService $articleService, Request $request)
     {
-        $articles = $this->article->orderBy('id', 'desc')->paginate(15);
+        $where = ArticleService::backendSearchWhere($request);
+        $articles = $this->article->backendSearchArticle($where);
         $category   = [];
         $author     = [];
         if ($articles) {

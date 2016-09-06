@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\UserRepositoryEloquent;
 use App\Repositories\CategoryRepositoryEloquent;
+use App\Http\Request;
 
 class ArticleService
 {
@@ -72,5 +73,26 @@ class ArticleService
             $new[$d['id']] = $d['name'];
         }
         return $new;
+    }
+
+
+    /**
+     * 搜索where条件
+     *
+     * @param $request
+     * @return array
+     */
+    public static function backendSearchWhere($request)
+    {
+        $where = [];
+        if ($request->title != "") {
+            $where[] = ['title', 'like', "%".$request->title."%"];
+        }
+
+        if ($request->cate_id > 0) {
+            $where[] = ['cate_id', '=', $request->cate_id];
+        }
+
+        return $where;
     }
 }

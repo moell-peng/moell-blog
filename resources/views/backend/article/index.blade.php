@@ -14,14 +14,10 @@
             <div class="box box-solid">
                 @include('backend.alert.success')
                 <div class="box-header">
-                    <form class="form-inline">
+                    <form class="form-inline" action="" method="get">
                         <div class="form-group">
                             <label for="title">标题</label>&nbsp;
                             <input name='title' type="text" class="form-control" id="title" placeholder="请输入文章标题">&nbsp;
-                        </div>
-                        <div class="form-group">
-                            <label for="tag">标签</label>&nbsp;
-                            <input name='tag' type="text" class="form-control" id="tag" placeholder="请输入文章标签">
                         </div>
                         <div class="form-group">
                             <label for="cate_id">分类</label>&nbsp;

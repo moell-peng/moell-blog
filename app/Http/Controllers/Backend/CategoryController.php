@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Repositories\CategoryRepositoryEloquent;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Repositories\CategoryRepositoryEloquent;
 use App\Http\Requests\Backend\Category\CreateRequest;
 use App\Http\Requests\Backend\Category\UpdateRequest;
+use App\Repositories\NavigationRepositoryEloquent;
+use Mockery\CountValidator\Exception;
 
 class CategoryController extends Controller
 {
@@ -104,12 +105,28 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        if ($category) {
-            if ($category->delete()) {
-                return response()->json(['status' => 0]);
-            }
+        if ($this->category->delete($id)) {
+            return response()->json(['status' => 0]);
         }
         return response()->json(['status' => 1]);
+    }
+
+    /**
+     * @param $id
+     * @param NavigationRepositoryEloquent $nav
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function setNavigation($id, NavigationRepositoryEloquent $nav)
+    {
+        try {
+            $category = $this->category->find($id);
+            if ($nav->setCategoryNav($category->id, $category->name)) {
+                return redirect()->back()->with('success', '设置成功');
+            }
+            throw new Exception('设置失败');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 }

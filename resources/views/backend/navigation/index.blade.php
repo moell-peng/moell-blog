@@ -64,10 +64,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($navigation->nav_type == 0)
                                         <a href='{{ route("backend.navigation.edit", ["id" => $navigation->id]) }}' class='btn btn-info btn-xs'>
                                             <i class="fa fa-pencil"></i> 修改</a>
-                                        @endif
                                         <a data-href='{{ route("backend.navigation.destroy", ["id" => $navigation->id]) }}'
                                            class='btn btn-danger btn-xs navigation-delete'><i class="fa fa-trash-o"></i> 删除</a>
                                     </td>

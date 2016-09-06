@@ -39,6 +39,9 @@
                                     <td>
                                         <a href='{{ route("backend.category.edit", ["id" => $id]) }}' class='btn btn-info btn-xs'>
                                             <i class="fa fa-pencil"></i> 修改</a>
+                                        <a href='{{ route("backend.category.set-nav", ["id" => $id]) }}' class='btn btn-info btn-xs'>
+                                            设为导航
+                                        </a>
                                         <a data-href='{{ route("backend.category.destroy", ["id" => $id]) }}'
                                            class='btn btn-danger btn-xs category-delete'><i class="fa fa-trash-o"></i> 删除</a>
                                     </td>

@@ -10,6 +10,6 @@ class Navigation extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['name','url','sequence','state'];
+    protected $fillable = ['name','url','sequence','state', 'article_cate_id', 'nav_type'];
 
 }
