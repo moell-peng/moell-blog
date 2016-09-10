@@ -11,6 +11,7 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12">
+            @include('backend.alert.warning')
             @include('backend.alert.success')
             <div class="box box-solid">
                 <!-- /.box-header -->

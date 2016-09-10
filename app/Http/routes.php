@@ -34,5 +34,7 @@ Route::group(['prefix'=>'backend'], function(){
         Route::resource('tag', 'Backend\TagController');
         Route::resource('link', 'Backend\LinkController');
         Route::resource('navigation', 'Backend\NavigationController');
+        Route::get('system', ['as' => 'backend.system.index', 'uses' => 'Backend\SystemController@index']);
+        Route::post('system', ['as' => 'backend.system.store', 'uses' => 'Backend\SystemController@store']);
     });
 });

@@ -1,16 +1,20 @@
+@inject('systemPresenter', 'App\Presenters\SystemPresenter')
+
 @extends('layouts.app')
 
-@section('title', 'Moell Blog')
+@section('title', $systemPresenter->getKeyValue('title'))
 
-@section('description', 'Moell Blog')
+@section('description', $systemPresenter->getKeyValue('seo_desc'))
 
-@section('keywords', 'Moell Blog')
+@section('keywords', $systemPresenter->getKeyValue('seo_keyword'))
 
 @section('header-text')
     <div class="text-inner text-center">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h1 class="to-animate fadeInUp animated">做努力的自己</h1>
+                <h1 class="to-animate fadeInUp animated">
+                    {{ $systemPresenter->getKeyValue('motto') }}
+                </h1>
                 <div class="to-animate fadeInUp animated">
                     <a href=''>github</a>
                     <a href=''>web</a>

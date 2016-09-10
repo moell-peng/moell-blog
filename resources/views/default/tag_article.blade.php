@@ -1,10 +1,12 @@
+@inject('systemPresenter', 'App\Presenters\SystemPresenter')
+
 @extends('layouts.app')
 
 @section('title', $tag->tag_name)
 
-@section('description', $tag->tag_name)
+@section('description', $systemPresenter->getKeyValue('seo_desc'))
 
-@section('keywords', $tag->tag_name)
+@section('keywords', $systemPresenter->getKeyValue('seo_keyword'))
 
 @section('header-text')
     <div class="text-inner">

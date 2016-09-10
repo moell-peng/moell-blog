@@ -27,6 +27,7 @@
 
 </head>
 <body>
+@inject('systemPresenter', 'App\Presenters\SystemPresenter')
 <header id='moell-header'>
     <nav class='navbar navbar-default'>
         <div class='container'>
@@ -38,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url("/") }}" >Moell Blog</a>
+                <a class="navbar-brand" href="{{ url("/") }}" >{{ $systemPresenter->getKeyValue('blog_name') }}</a>
             </div>
             @include('default.navigation')
         </div>

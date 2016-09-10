@@ -52,12 +52,12 @@
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-success">4</span>
-                        </a>
+                        </a>--}}
                         <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
+                            {{--<li class="header">You have 4 messages</li>--}}
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
@@ -141,7 +141,7 @@
 
                                 <p>
                                     Moell Blog - 做努力的自己
-                                    <small>2016年6月</small>
+                                    {{--<small></small>--}}
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -162,10 +162,10 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">关于我</a>
+                                    <a href="{{ url('/') }}" target="_blank" class="btn btn-default btn-flat">首页</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ url('backend/loginout') }}" class="btn btn-default btn-flat">退出</a>
+                                    <a href="{{ url('backend/logout') }}" class="btn btn-default btn-flat">退出</a>
                                 </div>
                             </li>
                         </ul>
@@ -246,7 +246,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('backend/setting') }}">博客设置</a></li>
+                        <li><a href="{{ url('backend/system') }}">博客设置</a></li>
                         <li><a href="{{ url('backend/link') }}">友情链接</a></li>
                     </ul>
                 </li>
@@ -271,7 +271,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 0.0.1
         </div>
-        <strong>Copyright &copy;<a href="http://almsaeedstudio.com">moell</a>.</strong>
+        <strong>Copyright &copy;<a href="http://moell.cn" target="_blank">Moell Blog</a></strong>
     </footer>
 </div>
 <!-- ./wrapper -->

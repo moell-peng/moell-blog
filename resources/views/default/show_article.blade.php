@@ -1,10 +1,12 @@
+@inject('systemPresenter', 'App\Presenters\SystemPresenter')
+
 @extends('layouts.app')
 
-@section('title', $article->title)
+@section('title', $systemPresenter->checkReturnValue('title', $article->title))
 
-@section('description', $article->desc)
+@section('description', $systemPresenter->checkReturnValue('seo_desc', $article->desc))
 
-@section('keywords', $article->keyword)
+@section('keywords', $systemPresenter->checkReturnValue('seo_keyword', $article->keyword))
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('editor.md/css/editormd.preview.min.css') }}">

@@ -12,6 +12,6 @@
                     <a href="{{ route('tag', ['id' => $tl->id]) }}" target="_blank">{{ $tl->tag_name }}</a>
                 </span>
             @endforeach
-        @endif;
+        @endif
     </div>
 </div>
