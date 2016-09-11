@@ -235,4 +235,14 @@ ol, ul {
 }
 .article-list-item {
     border-bottom: 1px solid #ddd;
+    padding:30px 0px;
+}
+.icon-github {
+    background: url('/default/icons/github.png') no-repeat;
+    background-size: 16px 16px;
+}
+
+.icon-weibo {
+    background: url('/default/icons/weibo.png') no-repeat;
+    background-size: 16px 16px;
 }

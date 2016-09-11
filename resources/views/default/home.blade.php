@@ -16,8 +16,21 @@
                     {{ $systemPresenter->getKeyValue('motto') }}
                 </h1>
                 <div class="to-animate fadeInUp animated">
-                    <a href=''>github</a>
-                    <a href=''>web</a>
+                    <?php
+                    $github_url = $systemPresenter->getKeyValue('github_url');
+                    $weibo_url = $systemPresenter->getKeyValue('weibo_url');
+                    ?>
+                    @if ($github_url != "")
+                        <span class="icon-github" style="padding-left:20px;">
+                            <a href='{{ $github_url }}' target="_blank">github</a>
+                        </span>
+                    @endif
+                    @if ($weibo_url != "")
+                        <span class="icon-weibo" style="padding-left:20px;margin-left:10px;">
+                            <a href='{{ $weibo_url }}' target="_blank">web</a>
+                        </span>
+                    @endif
+
                 </div>
             </div>
         </div>
