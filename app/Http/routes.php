@@ -25,7 +25,7 @@ Route::group(['prefix'=>'backend'], function(){
     /*Route::get('/register', 'Backend\AuthController@getRegister');
     Route::post('/register', 'Backend\AuthController@postRegister');*/
 
-   Route::group(['middleware' => ['auth']], function(){
+    Route::group(['middleware' => ['auth']], function(){
         Route::get('/', 'Backend\HomeController@index');
         Route::resource('article', 'Backend\ArticleController');
         Route::resource('category', 'Backend\CategoryController');
@@ -36,5 +36,11 @@ Route::group(['prefix'=>'backend'], function(){
         Route::resource('navigation', 'Backend\NavigationController');
         Route::get('system', ['as' => 'backend.system.index', 'uses' => 'Backend\SystemController@index']);
         Route::post('system', ['as' => 'backend.system.store', 'uses' => 'Backend\SystemController@store']);
+        Route::get('upload', ['as' => 'backend.upload.index', 'uses' => 'Backend\UploadController@index']);
+        Route::delete('file-del', ['as' => 'backend.upload.file-del', 'uses' => 'Backend\UploadController@fileDelete']);
+        Route::delete('dir-del', ['as' => 'backend.upload.dir-del', 'uses' => 'Backend\UploadController@dirDelete']);
+        Route::post('mkdir', ['as' => 'backend.upload.mkdir', 'uses' => 'Backend\UploadController@makeDir']);
+        Route::get('file-upload', ['as' => 'backend.upload.file-upload', 'uses' => 'Backend\UploadController@fileUpload']);
+        Route::post('file-stroe', ['as' => 'backend.upload.file-store', 'uses' => 'Backend\UploadController@fileStore']);
     });
 });

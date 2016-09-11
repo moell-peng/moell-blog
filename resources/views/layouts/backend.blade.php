@@ -71,21 +71,6 @@
                                     {{--<small></small>--}}
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            {{--<li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>--}}
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
@@ -139,16 +124,11 @@
                         <i class="fa fa-tags"></i> <span>标签</span>
                     </a>
                 </li>
-                <li class="treeview">
-                    <a href="#">
+                <li>
+                    <a href="{{ url('backend/upload') }}">
                         <i class="fa fa-file-image-o"></i>
-                        <span>多媒体</span>
-                        <i class="fa fa-angle-left pull-right"></i>
+                        <span>文件</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/charts/chartjs.html">媒体库</a></li>
-                        <li><a href="pages/charts/morris.html">添加</a></li>
-                    </ul>
                 </li>
                 <li>
                     <a href="{{ url('backend/navigation') }}">
