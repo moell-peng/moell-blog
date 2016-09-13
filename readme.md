@@ -5,7 +5,6 @@ Moell Blog 是一个基于Laravel5.2开发并支持markdow语法开源的简易�
 ### 安装文档
 参阅 [Document](http://www.moell.cn/article/1 "Document")
 ### 截图
-![首页](http://www.moell.cn/uploads/blog/index.jpg "首页")
 **首页**
 ![首页](http://www.moell.cn/uploads/blog/index.jpg "首页")
 **文章**
