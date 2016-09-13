@@ -176,9 +176,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 0.0.1
+
         </div>
-        <strong>Copyright &copy;<a href="http://moell.cn" target="_blank">Moell Blog</a></strong>
+        <strong>Powered by <a href="http://moell.cn" target="_blank">Moell Blog</a></strong>
     </footer>
 </div>
 <!-- ./wrapper -->
