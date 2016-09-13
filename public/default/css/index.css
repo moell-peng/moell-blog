@@ -1,6 +1,3 @@
-ol, ul {
-    list-style: none;
-}
 #moell-header {
     position: absolute;
     z-index: 99;
@@ -232,6 +229,7 @@ ol, ul {
 }
 .article-list {
     padding-left: 0px;
+    list-style: none;
 }
 .article-list-item {
     border-bottom: 1px solid #ddd;
