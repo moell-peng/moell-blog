@@ -106,7 +106,7 @@ class UploadService
      * @param $dir
      * @return array
      */
-    function fileInfo($dir)
+    public function fileInfo($dir)
     {
         $files = $this->disk->files($dir);
 
@@ -129,17 +129,17 @@ class UploadService
         return $filesInfo;
     }
 
-    function getFileMimeType($path)
+    public function getFileMimeType($path)
     {
         return $this->phpRepository->findType(pathinfo($path, PATHINFO_EXTENSION));
     }
 
-    function getFileSize($path)
+    public function getFileSize($path)
     {
         return $this->disk->size($path);
     }
 
-    function getLastModified($path)
+    public function getLastModified($path)
     {
         return date('Y-m-d H:i:s', $this->disk->lastModified($path));
     }
