@@ -91,6 +91,7 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
+            @inject('backendPresenter', 'App\Presenters\BackendPresenter')
             <div class="user-panel">
                 <div class="pull-left image">
                     <img src="{{ asset('uploads/avatar')."/".Auth::user()->user_pic }}" class="img-circle" alt="User Image">
@@ -100,64 +101,8 @@
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-            <ul class="sidebar-menu">
-                <li class="header">博客导航</li>
-                <li class="active treeview">
-                    <a href="{{ url('backend') }}">
-                        <i class="fa fa-home"></i> <span>Home</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-files-o"></i>
-                        <span>文章</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('backend/article') }}">文章管理</a></li>
-                        <li><a href="{{ url('backend/article/create') }}">发布文章</a></li>
-                        <li><a href="{{ url('backend/category') }}">文章分类</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="{{ url('backend/tag') }}">
-                        <i class="fa fa-tags"></i> <span>标签</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('backend/upload') }}">
-                        <i class="fa fa-file-image-o"></i>
-                        <span>文件</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('backend/navigation') }}">
-                        <i class="fa fa-navicon"></i>
-                        <span>导航</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-user"></i>
-                        <span>用户</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('backend/user') }}">用户管理</a></li>
-                        <li><a href="{{ url('backend/user/create') }}">用户添加</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-cog"></i> <span>设置</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('backend/system') }}">博客设置</a></li>
-                        <li><a href="{{ url('backend/link') }}">友情链接</a></li>
-                    </ul>
-                </li>
-
+            <ul class='sidebar-menu'>
+                {!! $backendPresenter->menu()  !!}
             </ul>
         </section>
         <!-- /.sidebar -->

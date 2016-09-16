@@ -26,7 +26,7 @@ Route::group(['prefix'=>'backend'], function(){
     Route::post('/register', 'Backend\AuthController@postRegister');*/
 
     Route::group(['middleware' => ['auth']], function(){
-        Route::get('/', 'Backend\HomeController@index');
+        Route::get('/', ['as' => 'backend.home', 'uses' =>'Backend\HomeController@index']);
         Route::resource('article', 'Backend\ArticleController');
         Route::resource('category', 'Backend\CategoryController');
         Route::get('category/set-nav/{id}', ['as' => 'backend.category.set-nav', 'uses' => 'Backend\CategoryController@setNavigation']);

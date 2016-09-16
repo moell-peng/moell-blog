@@ -20,7 +20,7 @@
             <div class="box box-solid" style="padding: 10px;">
                 <h3>欢迎使用Moell Blog!</h3>
                 <strong>简介</strong>
-                <p> Moell Blog 是一个基于Laravel支持markdow语法开源的简易blog,致力于给博主更好的写作体验。</p>
+                <p> Moell Blog 是一个基于Laravel开发，支持markdown语法开源的简易博客,致力于给博主更好的写作体验。</p>
                 <strong>开发者信息</strong>
                 <p>Name : Moell</p>
                 <p>Email : moell91@foxmail.com</p>
