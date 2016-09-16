@@ -6,4 +6,3 @@ Homestead.json
 .env
 /.idea
 /public/uploads
-*.js linguist-language=PHP
