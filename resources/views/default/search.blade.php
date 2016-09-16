@@ -4,9 +4,9 @@
     </div>
     <div class='panel-body'>
         <div class='row'>
-            <div class='col-md-8'>
+            <div class='col-md-12'>
                 <form action={{ route('search') }} class="form-inline" role="form">
-                    <div class="input-group input-group-sm">
+                    <div class="input-group">
                         <input type="search" class="search-field form-control" value="" name="keyword" placeholder="请输入关键字">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default">

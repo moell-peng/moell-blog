@@ -235,6 +235,15 @@
     border-bottom: 1px solid #ddd;
     padding:30px 0px;
 }
+.article-list-item .title {
+    margin-top:10px;
+    word-break:break-all;
+}
+
+.article-list-item .desc {
+    margin-top:10px;
+    word-break:break-all;
+}
 .icon-github {
     background: url('/default/icons/github.png') no-repeat;
     background-size: 16px 16px;

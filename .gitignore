@@ -5,4 +5,4 @@ Homestead.yaml
 Homestead.json
 .env
 /.idea
-/public/uploads/avatar
+/public/uploads
