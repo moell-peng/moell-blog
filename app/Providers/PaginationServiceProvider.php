@@ -16,7 +16,7 @@ class PaginationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //×Ô¶¨Òå·ÖÒ³Ä£°å
+        //è‡ªå®šä¹‰åˆ†é¡µæ¨¡æ¿
         Paginator::presenter(function (AbstractPaginator $paginator) {
             return new PagiationPresenter($paginator);
         });
