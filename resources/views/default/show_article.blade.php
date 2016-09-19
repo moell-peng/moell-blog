@@ -20,7 +20,7 @@
                     {{ $article->title }}
                 </h3>
 
-                <p class="to-animate fadeInUp animated">
+                <p class="to-animate fadeInUp animated" style="margin-top:10px;">
                     {{ $article->desc }}
                 </p>
 
