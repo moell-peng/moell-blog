@@ -19,13 +19,15 @@
                 <h3 class="to-animate fadeInUp animated">
                     {{ $article->title }}
                 </h3>
+
+                <p class="to-animate fadeInUp animated">
+                    {{ $article->desc }}
+                </p>
+
                 <p class="to-animate fadeInUp animated">
                     <i class="glyphicon glyphicon-calendar"></i>{{ $article->created_at }}
                     &nbsp;
                     <i class="glyphicon glyphicon-user"></i>{{ $user->name }}
-                </p>
-                <p class="to-animate fadeInUp animated">
-                    {{ $article->desc }}
                 </p>
             </div>
         </div>
