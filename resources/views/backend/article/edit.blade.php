@@ -48,7 +48,7 @@
                             <label for="content">文章内容</label>
                             <div id="editormd">
                                 <textarea class="editormd-markdown-textarea" style="display:none;" id="content" name="markdown-content">{{ $article->content }}</textarea>
-                                <!-- <textarea class="editormd-html-textarea" style="display:none;"  name="html-content"></textarea> -->
+                                <textarea  style="display:none;"  name="html-content"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -90,14 +90,43 @@
 @section('javascript')
     <script src="{{ asset('editor.md/editormd.min.js') }}"></script>
     <script>
-        $(function() {
-            var editor = editormd("editormd", {
-                path        : " {{ asset('/editor.md/lib/') }}/",
-                height  : 500,
-                syncScrolling : "single",
-                toolbarAutoFixed: false,
-                saveHTMLToTextarea : true
-            });
+
+        var editor = editormd("editormd", {
+            path        : " {{ asset('/editor.md/lib/') }}/",
+            height  : 500,
+            syncScrolling : "single",
+            toolbarAutoFixed: false,
+            saveHTMLToTextarea : false
+        });
+
+        /* 文章操作验证 */
+        $("#article-form").bootstrapValidator({
+            live: 'disables',
+            message: "This Values is not valid",
+            feedbackIcons: {
+                valid: 'glyphicon ',
+                invalid: 'glyphicon ',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields : {
+                title : {
+                    validators : {
+                        notEmpty : {
+                            message : "文章标题不能为空"
+                        }
+                    }
+                },
+                cate_id : {
+                    validators : {
+                        notEmpty : {
+                            message : "请选择文章分类"
+                        }
+                    }
+                }
+            }
+        }).on('success.form.bv', function(e) {
+            var html = editor.getPreviewedHTML();
+            $("#article-form textarea[name='html-content']").val(html);
         });
     </script>
 @endsection

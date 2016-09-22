@@ -29,27 +29,7 @@ $(function() {
         categoryForm.data('bootstrapValidator').resetForm(true);
         categoryForm[0].reset();
     });
-
-    /* 文章操作验证 */
-    $("#article-form").bootstrapValidator({
-        validatorDefaultParam,
-        fields : {
-            title : {
-                validators : {
-                    notEmpty : {
-                        message : "文章标题不能为空"
-                    }
-                }
-            },
-            cate_id : {
-                validators : {
-                    notEmpty : {
-                        message : "请选择文章分类"
-                    }
-                }
-            }
-        }
-    });
+    
 
     $("#article-form #reset-btn").click(function(){
         var articleForm = $("#article-form");

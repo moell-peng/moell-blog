@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
             $table->string('title', 200)->default('')->comment('文章标题');
             $table->string('keyword')->default('')->comment('keywords');
             $table->string('desc')->default('')->comment('描述');
-            $table->longText('content')->defualt('')->comment('文章内容');
+            $table->longText('content')->nullable()->comment('文章内容,markdown格式');
             $table->integer('user_id')->default(0)->comment('文章编写人,对应users表');
             $table->integer('cate_id')->default(0)->comment('文章分类');
             $table->integer('comment_count')->default(0)->comment('评论数量');

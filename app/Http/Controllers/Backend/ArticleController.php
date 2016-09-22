@@ -66,6 +66,7 @@ class ArticleController extends Controller
         $article = $this->article->create([
             'title' => $request->title,
             'content'   => $request->get('markdown-content'),
+            'html_content'   => $request->get('html-content'),
             'keyword'   => $request->keyword,
             'desc' => $request->desc,
             'cate_id'   => $request->cate_id,
@@ -123,6 +124,7 @@ class ArticleController extends Controller
             $data['keyword']    = $request->keyword;
             $data['cate_id']    = $request->cate_id;
             $data['content']    = $request->get('markdown-content');
+            $data['html_content']    = $request->get('html-content');
             if ($this->article->update($data, $id)) {
                 $articleTagService->updateArticleTags($id, $request->tags);
                 return redirect('backend/article')

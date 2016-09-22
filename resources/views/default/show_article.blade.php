@@ -35,8 +35,8 @@
 @endsection
 
 @section('content')
-    <div id="content-markdown" style="padding:0;">
-        <textarea  style="display:none;">{!! $article->content !!}</textarea>
+    <div class="markdown-body editormd-html-preview" style="padding:0;">
+        {!! $article->html_content !!}
     </div>
 
     <div class="panel panel-default" style="margin-top:5px;">
@@ -72,7 +72,7 @@
     <script src="{{ asset('editor.md/lib/jquery.flowchart.min.js') }}"></script>
 
     <script src="{{ asset('editor.md/editormd.min.js') }}"></script>
-    <script>
+    {{--<<script>
         $(function(){
             editormd.markdownToHTML("content-markdown", {
                 //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
@@ -93,5 +93,5 @@
 
             });
         });
-    </script>
+    </script>--}}
 @endsection

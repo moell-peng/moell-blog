@@ -205,7 +205,7 @@
     margin: 0;
 }
 #moell-home .text-inner .article-info {
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.8);
 }
 #moell-home .gradient {
     position: absolute;
