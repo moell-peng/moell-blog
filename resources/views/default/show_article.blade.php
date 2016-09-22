@@ -10,6 +10,7 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('editor.md/css/editormd.preview.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('share.js/css/share.min.css') }}">
 @endsection
 
 @section('header-text')
@@ -39,7 +40,10 @@
         {!! $article->html_content !!}
     </div>
 
-    <div class="panel panel-default" style="margin-top:5px;">
+    <div class="panel panel-default" style="margin-top:10px;">
+        <div>
+            <div id="share" class="social-share"></div>
+        </div>
         <div class="panel-body">
             <p>分类:
                 <i class="glyphicon glyphicon-th-list"></i>
@@ -62,36 +66,12 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('editor.md/lib/marked.min.js') }}"></script>
-    <script src="{{ asset('editor.md/lib/prettify.min.js') }}"></script>
+    <script src="{{ asset('share.js/js/jquery.share.min.js') }}"></script>
 
-    <script src="{{ asset('editor.md/lib/raphael.min.js') }}"></script>
-    <script src="{{ asset('editor.md/lib/underscore.min.js') }}"></script>
-    <script src="{{ asset('editor.md/lib/sequence-diagram.min.js') }}"></script>
-    <script src="{{ asset('editor.md/lib/flowchart.min.js') }}"></script>
-    <script src="{{ asset('editor.md/lib/jquery.flowchart.min.js') }}"></script>
-
-    <script src="{{ asset('editor.md/editormd.min.js') }}"></script>
-    {{--<<script>
+    <script>
         $(function(){
-            editormd.markdownToHTML("content-markdown", {
-                //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
-                htmlDecode      : "style,script,iframe",  // you can filter tags decode
-                //toc             : false,
-                //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
-                //gfm             : false,
-                //tocDropdown     : true,
-                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
-                emoji           : true,
-                taskList        : true,
-                tex             : true,  // 默认不解析
-                flowChart       : true,  // 默认不解析
-                sequenceDiagram : true,  // 默认不解析
-                theme : "dark",
-                previewTheme : "dark",
-                editorTheme : "pastel-on-dark",
-
-            });
+            $('#share').share({sites: ['qzone', 'qq', 'weibo','wechat']});
         });
-    </script>--}}
+    </script>
+
 @endsection

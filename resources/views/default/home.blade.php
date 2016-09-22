@@ -22,11 +22,11 @@
                     ?>
                     @if ($github_url != "")
                         <span class="icon-github" style="padding-left:20px;">
-                            <a href='{{ $github_url }}' target="_blank">Github</a>
+                            <a href='{{ $github_url }}' target="_blank">GitHub</a>
                         </span>
                     @endif
                     @if ($weibo_url != "")
-                        <span class="icon-weibo" style="padding-left:20px;margin-left:10px;">
+                        <span class="icon-sina-weibo" style="padding-left:20px;margin-left:10px;">
                             <a href='{{ $weibo_url }}' target="_blank">Weibo</a>
                         </span>
                     @endif
