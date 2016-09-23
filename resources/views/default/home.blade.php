@@ -9,9 +9,9 @@
 @section('keywords', $systemPresenter->getKeyValue('seo_keyword'))
 
 @section('header-text')
-    <div class="text-inner text-center">
+    <div class="text-inner">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <h1 class="to-animate fadeInUp animated">
                     {{ $systemPresenter->getKeyValue('motto') }}
                 </h1>
