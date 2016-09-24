@@ -38,4 +38,14 @@ class UserPresenter extends FractalPresenter
             return $user->name;
         }
     }
+
+    public function getUserInfo($userId = 0) {
+        $columns = ['id', 'name', 'user_pic'];
+
+        if ($userId > 0) {
+            return $this->user->find($userId, $columns);
+        }
+        return $this->user->first($columns);
+
+    }
 }

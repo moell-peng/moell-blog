@@ -184,10 +184,6 @@
     word-break:break-all;
 }
 
-#moell-home .text-inner a {
-    //color: rgba(255, 255, 255, 0.8);
-    color: #000000;
-}
 
 #moell-home .text-inner h1 {
     font-size: 40px;
@@ -259,7 +255,19 @@
 
 #footer {
     border-top:1px solid #ddd;
-    margin-top:40px;
+    margin-top:20px;
     height:60px;
-    background-color: #ffffff;
+    background-color: #fafafa;
+}
+
+.author .author-footer{
+    margin-top:20px;
+}
+
+.author .author-avatar {
+    max-width:150px;
+}
+
+.author .author-footer a {
+    color: #000000;
 }

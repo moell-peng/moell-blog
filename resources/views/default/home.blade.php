@@ -15,23 +15,6 @@
                 <h1 class="to-animate fadeInUp animated">
                     {{ $systemPresenter->getKeyValue('motto') }}
                 </h1>
-                <div class="to-animate fadeInUp animated">
-                    <?php
-                    $github_url = $systemPresenter->getKeyValue('github_url');
-                    $weibo_url = $systemPresenter->getKeyValue('weibo_url');
-                    ?>
-                    @if ($github_url != "")
-                        <span class="icon-github" style="padding-left:20px;">
-                            <a href='{{ $github_url }}' target="_blank">GitHub</a>
-                        </span>
-                    @endif
-                    @if ($weibo_url != "")
-                        <span class="icon-sina-weibo" style="padding-left:20px;margin-left:10px;">
-                            <a href='{{ $weibo_url }}' target="_blank">Weibo</a>
-                        </span>
-                    @endif
-
-                </div>
             </div>
         </div>
     </div>
