@@ -16,6 +16,8 @@ Route::get('/article/{id}', ['as' => 'article', 'uses' => 'ArticleController@ind
 Route::get('/category/{id}', ['as' => 'category', 'uses' => 'CategoryController@index']);
 Route::get('/tag/{id}', ['as' => 'tag', 'uses' => 'TagController@index']);
 Route::get('/search', ['as' => 'search', 'uses' => 'SearchController@index']);
+Route::get('/page/{alias}', ['as' => 'page.show', 'uses' => 'PageController@index']);
+Route::get('/about', ['as' => 'about', 'uses' => 'PageController@about']);
 
 Route::group(['prefix'=>'backend'], function(){
 
@@ -34,6 +36,7 @@ Route::group(['prefix'=>'backend'], function(){
         Route::resource('tag', 'Backend\TagController');
         Route::resource('link', 'Backend\LinkController');
         Route::resource('navigation', 'Backend\NavigationController');
+        Route::resource('page', 'Backend\PageController');
         Route::get('system', ['as' => 'backend.system.index', 'uses' => 'Backend\SystemController@index']);
         Route::post('system', ['as' => 'backend.system.store', 'uses' => 'Backend\SystemController@store']);
         Route::get('upload', ['as' => 'backend.upload.index', 'uses' => 'Backend\UploadController@index']);

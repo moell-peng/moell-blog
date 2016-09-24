@@ -24,7 +24,11 @@
                             @inject('categoryPresenter', 'App\Presenters\CategoryPresenter')
                             {!! $categoryPresenter->getSelect(0, '请选择', '') !!}
                         </div>
-                        <button type="submit" class="btn btn-default">搜索</button>
+                        <button type="submit" class="btn btn-info">搜索</button>
+                        <div class="pull-right">
+                            <a href='{{ route("backend.article.create") }}' class='btn btn-success btn-xs'>
+                                <i class="fa fa-plus"></i>发布文章</a>
+                        </div>
                     </form>
                 </div>
                 <!-- /.box-header -->

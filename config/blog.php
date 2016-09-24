@@ -66,7 +66,7 @@ return [
         [
             'tree_title' => [
                 'icon' => 'fa fa-cog',
-                'name' => '系统设置'
+                'name' => '设置'
             ],
             'backend.system.index' => [
                 'icon' => '',
@@ -75,6 +75,10 @@ return [
             'backend.link.index' => [
                 'icon' => '',
                 'name' => '友情链接'
+            ],
+            'backend.page.index' => [
+                'icon' => '',
+                'name' => '自定义页面'
             ]
         ]
     ]

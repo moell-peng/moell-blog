@@ -10,6 +10,7 @@ Moell Blog 是一个基于Laravel5.2开发并支持markdown语法开源的简易
 *  自定义导航，分类设置为导航
 *  文件管理
 *  友情链接
+*  自定义页面
 *  使用Repository 辅助Model，处理数据逻辑
 *  使用Service 辅助Controller, 处理业务逻辑
 *  使用Presenter 辅助View,处理显示逻辑

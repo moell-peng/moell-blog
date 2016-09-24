@@ -258,6 +258,10 @@
     margin-top:20px;
     height:60px;
     background-color: #fafafa;
+    background: -webkit-linear-gradient(#fafafa, #ffffff); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#fafafa #ffffff); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#fafafa, #ffffff); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#fafafa, #ffffff); /* 标准的语法 */
 }
 
 .author .author-footer{
