@@ -14,7 +14,7 @@
             <?php
             $github_url = '';
             $weibo_url = '';
-            if (!isset($user->id)) {
+            if (!isset($user->id) || $user->id == 1) { //临时
                 $github_url = $systemPresenter->getKeyValue('github_url');
                 $weibo_url = $systemPresenter->getKeyValue('weibo_url');
             }
