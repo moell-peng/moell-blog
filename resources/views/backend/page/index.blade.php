@@ -11,8 +11,8 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12">
+            @include('backend.alert.success')
             <div class="box box-solid">
-                @include('backend.alert.success')
                 <div class="box-header">
                     <div class="pull-right">
                         <a href='{{ route("backend.page.create") }}' class='btn btn-success btn-xs'>

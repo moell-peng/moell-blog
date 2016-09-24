@@ -11,8 +11,8 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12">
+            @include('backend.alert.success')
             <div class="box box-solid">
-                @include('backend.alert.success')
                 <div class="box-header">
                     <form class="form-inline" action="" method="get">
                         <div class="form-group">

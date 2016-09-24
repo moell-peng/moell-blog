@@ -32,7 +32,7 @@
                             <label for="link_alias">链接别名</label>
                             <div class="row">
                                 <div class='col-md-6'>
-                                    <input type='text' class='form-control' name="link_alias" id='link_alias' placeholder='链接别名,关于页面请用abuot关联'>
+                                    <input type='text' class='form-control' name="link_alias" id='link_alias' placeholder='链接别名,关于页面请用about关联'>
                                 </div>
                             </div>
                         </div>
