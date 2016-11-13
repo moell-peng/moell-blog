@@ -45,12 +45,16 @@
             <div id="share" class="social-share"></div>
         </div>
         <div class="panel-body">
-            <p>分类:
-                <i class="glyphicon glyphicon-th-list"></i>
-                <a href="{{ route('category', ['id' => $category->id]) }}" target="_blank">
-                    {{ $category->name }}
-                </a>
-            </p>
+            @if($category)
+                <p>分类:
+                    <i class="glyphicon glyphicon-th-list"></i>
+
+                    <a href="{{ route('category', ['id' => $category->id]) }}" target="_blank">
+                        {{ $category->name }}
+                    </a>
+
+                </p>
+            @endif
             @if ($tags)
                 <p>标签:
                     <i class="glyphicon glyphicon-tags"></i>&nbsp;

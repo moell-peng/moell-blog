@@ -58,9 +58,7 @@
                                     <td>{{ $article->read_count }}</td>
                                     <td>{{ $article->comment_count }}</td>
                                     <td>
-                                        @if($article->cate_id > 0)
-                                            {{ $category[$article->cate_id] }}
-                                        @endif
+                                        {{ $category[$article->cate_id] or '分类已删除' }}
                                     </td>
                                     <td>{{ $article->created_at }}</td>
                                     <td>

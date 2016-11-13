@@ -71,4 +71,18 @@ class CategoryPresenter extends FractalPresenter
         }
         return $name;
     }
+
+    /**
+     * @param $categoryId
+     * @return string
+     */
+    public function getIdLink($categoryId)
+    {
+        $name = $this->getIdName($categoryId);
+        if ($name) {
+            return "<i class=\"glyphicon glyphicon-th-list\"></i>
+                <a href='".route('category', ['id' => $categoryId])."'' target=\"_blank\">".$name."</a>";
+        }
+        return '';
+    }
 }
