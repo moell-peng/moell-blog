@@ -6,7 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\SystemRepository;
 use App\Models\System;
-use App\Validators\SystemValidator;
+use Illuminate\Container\Container as Application;
 
 /**
  * Class SystemRepositoryEloquent
@@ -14,6 +14,14 @@ use App\Validators\SystemValidator;
  */
 class SystemRepositoryEloquent extends BaseRepository implements SystemRepository
 {
+    private $config;
+
+    public function __construct(Application $app)
+    {
+        parent::__construct($app);
+        $this->config = config('blog.system_key');
+    }
+
     /**
      * Specify Model class name
      *
@@ -48,7 +56,9 @@ class SystemRepositoryEloquent extends BaseRepository implements SystemRepositor
 
         unset($data['_token']);
         foreach ($data as $key => $value) {
-            $this->model->where('key', $key)->update(['value' => $value]);
+            if (in_array($key, $this->config)) {
+                $this->updateOrCreate(['key' => $key], ['value' => $value]);
+            }
         }
 
         return true;
@@ -62,11 +72,24 @@ class SystemRepositoryEloquent extends BaseRepository implements SystemRepositor
     public function optionList()
     {
         $all = $this->all(['key', 'value']);
-        $system = [];
+        $system = $this->initSystemKey();
         foreach ($all as $a) {
             $system[$a['key']]  = $a['value'];
         }
 
         return $system;
+    }
+
+    /**
+     * @return array
+     */
+    private function initSystemKey()
+    {
+        $init = [];
+        $config = array_flip($this->config);
+        foreach ($config as $key => $value) {
+            $init[$key] = '';
+        }
+        return $init;
     }
 }

@@ -13,3 +13,4 @@
         </div>
     </div>
 </footer>
+{!! $systemPresenter->getKeyValue('statistics_script') !!}

@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "moell/moell-blog",
+    "description": "The Moell Blog.",
+    "keywords": ["blog", "laravel", "markdown blog", "php blog", "moell blog"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -11,7 +11,8 @@
         "baum/baum": "~1.1",
         "prettus/l5-repository": "^2.6",
         "league/fractal": "^0.13.0",
-        "dflydev/apache-mime-types": "^1.0"
+        "dflydev/apache-mime-types": "^1.0",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

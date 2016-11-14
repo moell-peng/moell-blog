@@ -5,6 +5,20 @@ return [
         'storage' => 'upload',
         'webPath' => '/uploads'
     ],
+    'system_key' => [
+        'blog_name',
+        'motto',
+        'title',
+        'seo_keyword',
+        'seo_desc',
+        'icp',
+        'github_url',
+        'weibo_url',
+        'disqus_short_name',
+        'duoshuo_short_name',
+        'comment_plugin',
+        'statistics_script'
+    ],
     'menu' => [
         [
             'backend.home' => [

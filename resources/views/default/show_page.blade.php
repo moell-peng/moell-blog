@@ -37,6 +37,12 @@
     <div style="margin-top:20px;">
         <div id="share" class="social-share"></div>
     </div>
+    <!-- 评论插件 -->
+    @include('default.comment.index', [
+        'commentId' => "page-".$page->id,
+        'commentTitle' => $page->title,
+        'commentUrl' => Request::getUri()
+    ])
 @endsection
 
 @section('script')

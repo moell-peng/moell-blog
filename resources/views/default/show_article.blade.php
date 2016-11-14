@@ -67,6 +67,12 @@
             @endif
         </div>
     </div>
+    <!-- 评论插件 -->
+    @include('default.comment.index', [
+        'commentId' => $article->id,
+        'commentTitle' => $article->title,
+        'commentUrl' => Request::getUri()
+    ])
 @endsection
 
 @section('script')

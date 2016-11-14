@@ -42,7 +42,7 @@ class SystemPresenter extends FractalPresenter
      */
     public function getKeyValue($key)
     {
-        return $this->list[$key];
+        return isset($this->list[$key]) ? $this->list[$key] : '';
     }
 
     /**

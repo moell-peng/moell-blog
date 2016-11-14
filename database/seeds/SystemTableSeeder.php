@@ -12,14 +12,8 @@ class SystemTableSeeder extends Seeder
     public function run()
     {
         $systems = [
-            ['key' => 'blog_name'],
-            ['key' => 'motto'],
-            ['key' => 'title'],
-            ['key' => 'seo_keyword'],
-            ['key' => 'seo_desc'],
-            ['key' => 'icp'],
-            ['key' => 'github_url'],
-            ['key' => 'weibo_url']
+            ['key' => 'blog_name', 'value' => 'Moell Blog'],
+            ['key' => 'motto', '欢迎使用Moell Blog,欢迎Star。']
         ];
         DB::table('systems')->insert($systems);
     }
