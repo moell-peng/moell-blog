@@ -92,4 +92,19 @@ class SystemRepositoryEloquent extends BaseRepository implements SystemRepositor
         }
         return $init;
     }
+
+    /**
+     * @param $key
+     * @return string
+     */
+    public function  getKeyValue($key)
+    {
+        $data = $this->findByField('key', $key);
+
+        if (isset($data[0])){
+            return $data[0]->value;
+        }
+
+        return '';
+    }
 }

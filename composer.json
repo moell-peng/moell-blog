@@ -12,7 +12,8 @@
         "prettus/l5-repository": "^2.6",
         "league/fractal": "^0.13.0",
         "dflydev/apache-mime-types": "^1.0",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "moell/laravel-rss": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
