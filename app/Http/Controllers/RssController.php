@@ -38,7 +38,7 @@ class RssController extends Controller
             foreach ($articles as $article) {
                 $item = [
                     'title' => $article->title,
-                    'description' => $this->stringFormat($article->html_content),
+                    'description' => $this->stringFormat($article->desc),
                     'link' => route('article', ['id' => $article->id]),
                     'pubDate' => date('Y-m-d', strtotime($article->created_at))
                 ];
