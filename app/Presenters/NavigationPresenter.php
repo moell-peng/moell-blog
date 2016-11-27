@@ -38,7 +38,7 @@ class NavigationPresenter extends FractalPresenter
      */
     public function simpleNavList()
     {
-        $navigations = $this->navigation->orderBy('sequence', 'desc')->all(['name', 'url']);
+        $navigations = $this->navigation->orderBy('sequence', 'desc')->findWhere(['state' => 0], ['name', 'url']);
         return $navigations;
     }
 }
