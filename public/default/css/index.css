@@ -15,7 +15,7 @@
         box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
     }
     #moell-header .navbar-brand {
-        color: #00CCCC  !important;
+        color: #3399FF  !important;
     }
     #moell-header #navbar li a {
         color: rgba(0, 0, 0, 0.5) !important;
@@ -24,7 +24,7 @@
         transition: 0.3s;
     }
     #moell-header #navbar li a:hover {
-        color: #00CCCC  !important;
+        color: #3399FF  !important;
     }
     #moell-header #navbar li a span:before {
         background: transparent !important;
@@ -32,7 +32,7 @@
     #moell-header #navbar li.active a {
         background: transparent;
         background: none;
-        color: #00CCCC  !important;
+        color: #3399FF  !important;
     }
     #moell-header #navbar li.active a span:before {
         visibility: visible;
@@ -46,7 +46,7 @@
 }
 #moell-header #navbar li a {
     font-family: "Source Sans Pro", Arial, sans-serif;
-    color: #00CCCC ;
+    color: #3399FF ;
     position: relative;
     font-size: 19px;
     font-weight: 300;
@@ -63,7 +63,7 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #999999;
+    background-color: #FFFFFF;
     visibility: hidden;
     -webkit-transform: scaleX(0);
     -moz-transform: scaleX(0);
@@ -77,7 +77,7 @@
     transition: all 0.3s ease-in-out 0s;
 }
 #moell-header #navbar li a:hover {
-    color: #999999;
+    color: #FFFFFF;
 }
 #moell-header #navbar li a:hover span:before {
     visibility: visible;
@@ -90,7 +90,7 @@
 #moell-header #navbar li.active a {
     background: transparent;
     background: none;
-    color: #999999;
+    color: #FFFFFF;
 }
 #moell-header #navbar li.active a span:before {
     visibility: visible;
@@ -102,8 +102,8 @@
     display: block;
     font-size: 30px;
     font-weight: 700;
-    padding-left: 0;
-    color: #00CCCC ;
+    padding-left: 15px;
+    color: #3399FF ;
 }
 #moell-header.navbar-fixed-top {
     position: fixed !important;
@@ -116,7 +116,7 @@
     top: 0;
 }
 #moell-header.navbar-fixed-top .navbar-brand {
-    color: #00CCCC ;
+    color: #3399FF ;
 }
 #moell-header.navbar-fixed-top #navbar li a {
     color: rgba(0, 0, 0, 0.5);
@@ -125,18 +125,18 @@
     transition: 0.3s;
 }
 #moell-header.navbar-fixed-top #navbar li a:hover {
-    color: #00CCCC ;
+    color: #3399FF ;
 }
 #moell-header.navbar-fixed-top #navbar li.active a {
     background: transparent;
     background: none;
-    color: #00CCCC ;
+    color: #3399FF ;
 }
 #moell-header.navbar-fixed-top #navbar li.active a span:before {
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
-    background-color: #00CCCC ;
+    background-color: #3399FF ;
 }
 #moell-header .navbar-default {
     border: transparent;
@@ -160,7 +160,7 @@
     color: #adadad;
 }
 #moell-header .navbar-default .brand-slogan em {
-    color: #00CCCC ;
+    color: #3399FF ;
     font-style: normal;
 }
 #moell-header a {
@@ -216,23 +216,23 @@
     z-index: 2;
     opacity: .9;
     -webkit-backface-visibility: hidden;
-    background-color: #00CCCC ;
+    background-color: #3399FF ;
     /* IE9, iOS 3.2+ */
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiMzZjk1ZWEiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iIzUyZDNhYSIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
-    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, #00CCCC ), color-stop(1, #999999));
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, #3399FF ), color-stop(1, #FFFFFF));
     /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(top left, #00CCCC  0%, #999999 100%);
+    background-image: -webkit-repeating-linear-gradient(top left, #3399FF  0%, #FFFFFF 100%);
     /* IE10+ */
-    background-image: repeating-linear-gradient(to bottom right, #00CCCC  0%, #999999 100%);
-    background-image: -ms-repeating-linear-gradient(top left, #00CCCC  0%, #999999 100%);
+    background-image: repeating-linear-gradient(to bottom right, #3399FF  0%, #FFFFFF 100%);
+    background-image: -ms-repeating-linear-gradient(top left, #3399FF  0%, #FFFFFF 100%);
 }
 .article-list {
     padding-left: 0px;
     list-style: none;
 }
 .article-list-item {
-    border-bottom: 1px solid #ddd;
-    padding:30px 0px;
+    border-bottom: 1px dashed #ddd;
+    padding:20px 0px;
 }
 .article-list-item .title {
     margin-top:10px;
