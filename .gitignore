@@ -6,3 +6,4 @@ Homestead.json
 .env
 /.idea
 /public/uploads
+/public/phpmyadmin
