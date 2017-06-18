@@ -54,35 +54,4 @@ class CategoryPresenter extends FractalPresenter
         return $select;
     }
 
-    /**
-     * 获取分类的名称
-     *
-     * @param $categoryId
-     * @return string
-     */
-    public function getIdName($categoryId)
-    {
-        $name = '';
-        if ($categoryId > 0) {
-            $data = $this->category->find($categoryId, ['name']);
-            if ($data) {
-                $name = $data->name;
-            }
-        }
-        return $name;
-    }
-
-    /**
-     * @param $categoryId
-     * @return string
-     */
-    public function getIdLink($categoryId)
-    {
-        $name = $this->getIdName($categoryId);
-        if ($name) {
-            return "<i class=\"glyphicon glyphicon-th-list\"></i>
-                <a href='".route('category', ['id' => $categoryId])."'' target=\"_blank\">".$name."</a>";
-        }
-        return '';
-    }
 }

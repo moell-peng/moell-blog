@@ -1,6 +1,5 @@
 @if($articles)
     <ol class="article-list">
-        @inject('catePresenter', 'App\Presenters\CategoryPresenter')
         @foreach ($articles as $article)
             <li>
                 <h4 class='title'>
