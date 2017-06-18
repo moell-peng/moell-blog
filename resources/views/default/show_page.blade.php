@@ -15,13 +15,13 @@
 
 @section('header-text')
     <div class="text-inner">
-        <div class="row">
-            <div class="col-md-12 article-info">
-                <h3 class="to-animate fadeInUp animated">
+        <div class="row to-animate fadeInUp animated">
+            <div class="col-md-12">
+                <h3 class="color-white">
                     {{ $page->title }}
                 </h3>
 
-                <p class="to-animate fadeInUp animated" style="margin-top:10px;">
+                <p class="color-white m-t-25">
                     {{ $page->desc }}
                 </p>
             </div>
