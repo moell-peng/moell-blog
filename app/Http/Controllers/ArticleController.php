@@ -19,16 +19,9 @@ class ArticleController extends Controller
 
     public function index($id)
     {
-        try {
-            $article = $this->article->find($id);
-            $category = $article->category;
-            $tags = $article->tag;
-            $user = $article->user;
-            $update['read_count'] = $article->read_count + 1;
-            $this->article->update($update, $id);
-            return view('default.show_article', compact('article', 'category', 'tags', 'user'));
-        } catch (\Exception $e) {
-            die($e->getMessage());
-        }
+        $article = $this->article->find($id);
+        $article->read_count = $article->read_count + 1;
+        $article->save();
+        return view('default.show_article', compact('article'));
     }
 }

@@ -24,14 +24,16 @@
                 <p class=" m-t-25 color-white">
                     <i class="glyphicon glyphicon-calendar"></i>{{ $article->created_at }}
                     &nbsp;
-                    <i class="glyphicon glyphicon-th-list"></i>
-                    <a href="{{ route('category', ['id' => $category->id]) }}" target="_blank">
-                        {{ $category->name }}
-                    </a>
+                    @if($article->category)
+                        <i class="glyphicon glyphicon-th-list"></i>
+                        <a href="{{ route('category', ['id' => $article->cate_id]) }}" target="_blank">
+                            {{ $article->category->name }}
+                        </a>
+                    @endif
                 </p>
                 <p class="color-white">
                     <i class="glyphicon glyphicon-tags"></i>&nbsp;
-                    @foreach ($tags as $tag)
+                    @foreach ($article->tag as $tag)
                         <a href="{{ route('tag', ['id' => $tag->id]) }}" target="_blank">
                             {{ $tag->tag_name }}
                         </a>
