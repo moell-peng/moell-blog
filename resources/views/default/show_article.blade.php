@@ -16,19 +16,27 @@
 @section('header-text')
     <div class="text-inner">
         <div class="row">
-            <div class="col-md-12 article-info">
-                <h3 class="to-animate fadeInUp animated">
+            <div class="col-md-12 to-animate fadeInUp animated">
+                <h3 class="color-white">
                     {{ $article->title }}
                 </h3>
 
-                <p class="to-animate fadeInUp animated" style="margin-top:10px;">
-                    {{ $article->desc }}
-                </p>
-
-                <p class="to-animate fadeInUp animated">
+                <p class=" m-t-25 color-white">
                     <i class="glyphicon glyphicon-calendar"></i>{{ $article->created_at }}
                     &nbsp;
-                    <i class="glyphicon glyphicon-user"></i>{{ $user->name }}
+                    <i class="glyphicon glyphicon-th-list"></i>
+                    <a href="{{ route('category', ['id' => $category->id]) }}" target="_blank">
+                        {{ $category->name }}
+                    </a>
+                </p>
+                <p class="color-white">
+                    <i class="glyphicon glyphicon-tags"></i>&nbsp;
+                    @foreach ($tags as $tag)
+                        <a href="{{ route('tag', ['id' => $tag->id]) }}" target="_blank">
+                            {{ $tag->tag_name }}
+                        </a>
+                        &nbsp;
+                    @endforeach
                 </p>
             </div>
         </div>
@@ -40,33 +48,7 @@
         {!! $article->html_content !!}
     </div>
 
-    <div class="panel panel-default" style="margin-top:10px;">
-        <div>
-            <div id="share" class="social-share"></div>
-        </div>
-        <div class="panel-body">
-            @if($category)
-                <p>分类:
-                    <i class="glyphicon glyphicon-th-list"></i>
-
-                    <a href="{{ route('category', ['id' => $category->id]) }}" target="_blank">
-                        {{ $category->name }}
-                    </a>
-
-                </p>
-            @endif
-            @if ($tags)
-                <p>标签:
-                    <i class="glyphicon glyphicon-tags"></i>&nbsp;
-                    @foreach ($tags as $tag)
-                        <a href="{{ route('tag', ['id' => $tag->id]) }}" target="_blank">
-                            {{ $tag->tag_name }} &nbsp;
-                        </a>
-                    @endforeach
-                </p>
-            @endif
-        </div>
-    </div>
+    <div id="share" class="social-share m-t-25"></div>
     <!-- 评论插件 -->
     @include('default.comment.index', [
         'commentId' => $article->id,

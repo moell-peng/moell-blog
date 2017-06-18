@@ -9,8 +9,8 @@
 @section('header-text')
     <div class="text-inner">
         <div class="row">
-            <div class="col-md-12 article-info">
-                <h3 class="to-animate fadeInUp animated">
+            <div class="col-md-12">
+                <h3 class="to-animate fadeInUp animated color-white">
                     <i class="glyphicon glyphicon-search"></i>
                     &nbsp;
                     {{ $keyword }}
