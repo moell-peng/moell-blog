@@ -29,7 +29,7 @@
 <body>
 @inject('systemPresenter', 'App\Presenters\SystemPresenter')
 <header id='moell-header'>
-    <nav class='navbar navbar-default'>
+    <nav class='navbar navbar-default navbar-static-top'>
         <div class='container'>
             <div class="navbar-header">
                 <!-- Mobile Toggle Menu Button -->
@@ -47,14 +47,14 @@
 
 </header>
 
-<section id="moell-home" data-section="home"   data-stellar-background-ratio="0.5">
-    <div class="gradient"></div>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
     <div class="container">
-        <div class="text-wrap">
+        <p>
             @yield('header-text')
-        </div>
+        </p>
     </div>
-</section>
+</div>
 
 <section id='content' style="margin-top:40px;">
     <div class='container'>
