@@ -1,7 +1,7 @@
 ## Moell Blog
-Moell Blog 是一个基于Laravel5.2开发并支持markdown语法开源的简易博客,致力于给博主更好的写作体验。
+Moell Blog 是一个基于Laravel5.2开发并支持markdown语法开源的简易博客。
 
-### 特点
+### 功能
 *  支持Markdown,写文章实时预览效果
 *  支持多种编程语言代码高亮
 *  文章搜索
@@ -12,13 +12,10 @@ Moell Blog 是一个基于Laravel5.2开发并支持markdown语法开源的简易
 *  友情链接
 *  自定义页面
 *  RSS
-*  评论插件多说,disqus自由选择
-*  使用Repository 辅助Model，处理数据逻辑
-*  使用Service 辅助Controller, 处理业务逻辑
-*  使用Presenter 辅助View,处理显示逻辑
+*  评论插件多说,disqus
 
 ### 前端演示地址
-查看 [Moell Blog](http://moell.cn "Moell Blog")
+查看 [moell](http://moell.cn "moell")
 
 ### 安装文档
 参阅 [Document](http://www.moell.cn/article/1 "Document")
@@ -28,14 +25,8 @@ QQ:339803849 （欢迎PHPer,Laravel爱好者加入）
 
 ### 截图
 
-**首页**
-![首页](http://www.moell.cn/uploads/github/index.png "首页")
+![首页](http://moell.cn/uploads/blog/new-index.png "首页")
 
-**文章**
-![文章](http://www.moell.cn/uploads/github/article-show.png "文章")
-
-**文章发布**
-![后台](http://www.moell.cn/uploads/github/backend.png "后台")
 
 ### License
 * 使用Moell Blog构建应用，必须在页脚添加上Powered by Moell Blog字样,并且Moell Blog 必须链接到http://www.moell.cn
