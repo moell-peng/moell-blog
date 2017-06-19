@@ -11,8 +11,7 @@ class SearchController extends Controller
 {
     public function index(Request $request, ArticleRepositoryEloquent $articleRepo)
     {
-        $keyword = $request->keyword;
         $articles = $articleRepo->searchKeywordArticle($request->keyword);
-        return view('default.search_article', compact('articles', 'keyword'));
+        return view('default.search_article', compact('articles'));
     }
 }

@@ -91,25 +91,6 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return true;
     }
 
-    /**
-     * @param $id
-     * @param array $columns
-     * @return mixed
-     */
-    public function find($id, $columns = ['*'])
-    {
-        $this->applyCriteria();
-        $this->applyScope();
-        $model = $this->model->find($id, $columns);
-        $this->resetModel();
-
-        return $this->parserResult($model);
-    }
-
-    public function baseFind($id, $columns = ['*'])
-    {
-        return parent::find($id, $columns);
-    }
 
     /**
      * Boot up the repository, pushing criteria

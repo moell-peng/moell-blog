@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', $keyword)
+@section('title', request('keyword'))
 
-@section('description', $keyword)
+@section('description', request('keyword'))
 
-@section('keywords', $keyword)
+@section('keywords', request('keyword'))
 
 @section('header-text')
     <div class="text-inner">
@@ -13,7 +13,7 @@
                 <h3 class="to-animate fadeInUp animated color-white">
                     <i class="glyphicon glyphicon-search"></i>
                     &nbsp;
-                    {{ $keyword }}
+                    {{ request('keyword') }}
                 </h3>
             </div>
         </div>

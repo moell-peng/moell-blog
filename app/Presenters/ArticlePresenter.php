@@ -38,7 +38,13 @@ class ArticlePresenter extends FractalPresenter
      */
     public function hotArticleList()
     {
-        return $this->article->orderBy('read_count', 'desc')->paginate(5, ['id', 'title']);
+        return $this->article
+            ->orderBy('read_count', 'desc')
+            ->paginate(5, [
+                'id',
+                'title',
+                'read_count'
+            ]);
     }
 
     public function formatTitle($title)

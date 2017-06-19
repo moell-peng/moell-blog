@@ -19,15 +19,11 @@ class TagController extends Controller
 
     public function index($id)
     {
-        try {
-            $tag = $this->tag->find($id);
-            $articles = $tag->article()
-                ->orderBy('sort','desc')
-                ->orderBy('id', 'desc')
-                ->paginate(15);
-            return view('default.tag_article', compact('articles', 'tag'));
-        } catch (\Exception $e) {
-            die($e->getMessage());
-        }
+        $tag = $this->tag->find($id);
+        $articles = $tag->article()
+            ->orderBy('sort','desc')
+            ->orderBy('id', 'desc')
+            ->paginate(15);
+        return view('default.tag_article', compact('articles', 'tag'));
     }
 }
