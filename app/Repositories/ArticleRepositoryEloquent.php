@@ -52,7 +52,7 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
      * @param array $where
      * @return mixed
      */
-    public  function backendSearchArticle(array $where)
+    public function search(array $where)
     {
         if (count($where) > 0) {
             $this->applyConditions($where);

@@ -16,15 +16,20 @@ use App\Services\ArticleService;
 
 class ArticleController extends Controller
 {
-    protected $article;
+    /**
+     * @var ArticleService
+     */
+    protected $articleServer;
 
-    protected $tag;
 
-
-    public function __construct(ArticleRepositoryEloquent $article, TagRepositoryEloquent $tag)
+    /**
+     * ArticleController constructor.
+     *
+     * @param ArticleService $articleService
+     */
+    public function __construct(ArticleService $articleService)
     {
-        $this->article = $article;
-        $this->tag  = $tag;
+        $this->articleServer = $articleService;
     }
 
     /**
@@ -32,18 +37,10 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ArticleService $articleService, Request $request)
+    public function index(Request $request)
     {
-        $where = ArticleService::backendSearchWhere($request);
-        $articles = $this->article->backendSearchArticle($where);
-        $category   = [];
-        $author     = [];
-        if ($articles) {
-            $data = $articleService->getArticleUserAndCategory($articles);
-            $category   = $data['category'];
-            $author     = $data['user'];
-        }
-        return view('backend.article.index', compact('articles', 'author', 'category'));
+        $articles = $this->articleServer->search($request);
+        return view('backend.article.index', compact('articles'));
     }
 
     /**
@@ -58,28 +55,11 @@ class ArticleController extends Controller
 
     /**
      * @param CreateRequest $request
-     * @param ArticleTagService $articleTagService
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function store(CreateRequest $request, ArticleTagService $articleTagService)
+    public function store(CreateRequest $request)
     {
-        $article = $this->article->create([
-            'title' => $request->title,
-            'content'   => $request->get('markdown-content'),
-            'html_content'   => $request->get('html-content'),
-            'keyword'   => $request->keyword,
-            'desc' => $request->desc,
-            'cate_id'   => $request->cate_id,
-            'user_id'   => Auth::user()->id
-        ]);
-        if ($article) {
-            if ($request->tags != "") {
-                $articleTagService->store($article->id, $request->tags);
-            }
-            return redirect('backend/article')
-                ->with('success', '文章添加成功');
-        }
-        return redirect()->back()->withErrors('系统异常,文章发布失败');
+        return $this->articleServer->store($request);
     }
 
     /**
@@ -94,64 +74,30 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return $this
      */
-    public function edit($id, ArticleTagService $articleTagService)
+    public function edit($id)
     {
-        $article = $this->article->find($id);
-        $tags = $article->articleTag;
-        $tagIdList = $articleTagService->tagsIdList($tags, false);
-        return view('backend.article.edit', compact('article', 'tagIdList'));
+        return view('backend.article.edit')->with($this->articleServer->edit($id));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, $id, ArticleTagService $articleTagService)
+    public function update(UpdateRequest $request, $id)
     {
-        $article = $this->article->find($id);
-        if ($article) {
-            $data = [];
-            $data['title']  = $request->title;
-            $data['desc']   = $request->desc;
-            $data['keyword']    = $request->keyword;
-            $data['cate_id']    = $request->cate_id;
-            $data['content']    = $request->get('markdown-content');
-            $data['html_content']    = $request->get('html-content');
-            if ($this->article->update($data, $id)) {
-                $articleTagService->updateArticleTags($id, $request->tags);
-                return redirect('backend/article')
-                    ->with('success', '文章修改成功');
-            }
-        }
-        return redirect()->back()->withErrors('系统异常,修改文章失败');
+        return $this->articleServer->update($request, $id);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        $article = $this->article->find($id);
-        if ($article) {
-            if ($this->article->delete($id)) {
-                $tags = $article->tags != "" ? explode(',', $article->tags) : "";
-                if (is_array($tags)) {
-                    $this->tag->reduceArticleNumber($tags);
-                }
-                return response()->json(['status' => 0]);
-            }
-        }
-        return response()->json(['status' => 1]);
+        return $this->articleServer->destory($id);
     }
 }

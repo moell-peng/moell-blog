@@ -52,13 +52,17 @@
                                 <tr>
                                     <td>{{ $line }}</td>
                                     <td>
-                                        {{ $author[$article->user_id] }}
+                                        @if($article->user)
+                                            {{ $article->user->name }}
+                                        @endif
                                     </td>
                                     <td>{{ $articlePresenter->formatTitle($article->title) }}</td>
                                     <td>{{ $article->read_count }}</td>
                                     <td>{{ $article->comment_count }}</td>
                                     <td>
-                                        {{ $category[$article->cate_id] or '分类已删除' }}
+                                        @if($article->category)
+                                            {{ $article->category->name }}
+                                        @endif
                                     </td>
                                     <td>{{ $article->created_at }}</td>
                                     <td>

@@ -2,97 +2,134 @@
 
 namespace App\Services;
 
-use App\Repositories\UserRepositoryEloquent;
-use App\Repositories\CategoryRepositoryEloquent;
-use App\Http\Request;
+use App\Repositories\ArticleRepositoryEloquent;
+use App\Repositories\TagRepositoryEloquent;
+use Illuminate\Http\Request;
+use Auth;
 
 class ArticleService
 {
-    protected $user;
-    protected $category;
 
-    public function __construct(UserRepositoryEloquent $user, CategoryRepositoryEloquent $category)
+    protected $article;
+
+    protected $tag;
+
+    /**
+     * ArticleService constructor.
+     * @param ArticleRepositoryEloquent $article
+     */
+    public function __construct(ArticleRepositoryEloquent $article, TagRepositoryEloquent $tag)
     {
-        $this->user = $user;
-        $this->category = $category;
-    }
-
-    public function getArticleUserAndCategory($articles)
-    {
-        $cate_id    = [];
-        $user_id    = [];
-        foreach ($articles as $article) {
-            $cate_id[] = $article->cate_id;
-            $user_id[] = $article->user_id;
-        }
-
-        return [
-            'category'  => $this->getCategoryIdName($cate_id),
-            'user'      => $this->getUserIdName($user_id)
-        ];
+        $this->article = $article;
+        $this->tag = $tag;
     }
 
     /**
-     * @param array $user
-     * @return array
+     * @param Request $request
+     * @return mixed
      */
-    protected function getUserIdName(array $user)
-    {
-        if (count($user) > 0) {
-            $users = $this->user->findWhereIn('id', $user, ['id', 'name']);
-            if ($users) {
-                return $this->formatIdName($users->toArray());
-            }
-        }
-        return [];
-    }
-
-    /**
-     * @param array $category
-     * @return array
-     */
-    protected function getCategoryIdName(array $category)
-    {
-        if (count($category) > 0) {
-            $categories = $this->category->findWhereIn('id', $category, ['id', 'name']);
-            if ($categories) {
-                return $this->formatIdName($categories->toArray());
-            }
-        }
-        return [];
-    }
-
-    /**
-     * @param array $data
-     * @return array
-     */
-    protected function formatIdName(array $data)
-    {
-        $new = [];
-        foreach ($data as $d) {
-            $new[$d['id']] = $d['name'];
-        }
-        return $new;
-    }
-
-
-    /**
-     * 搜索where条件
-     *
-     * @param $request
-     * @return array
-     */
-    public static function backendSearchWhere($request)
+    public function search(Request $request)
     {
         $where = [];
-        if ($request->title != "") {
+        if ($request->has('title')) {
             $where[] = ['title', 'like', "%".$request->title."%"];
         }
 
-        if ($request->cate_id > 0) {
+        if ($request->has('cate_id')) {
             $where[] = ['cate_id', '=', $request->cate_id];
         }
 
-        return $where;
+        return $this->article->with([
+            'user',
+            'category'
+        ])->search($where);
+    }
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        $article = $this->article->create(array_merge($this->basicFields($request),[
+            'user_id' => Auth::id()
+        ]));
+        if (!$article) {
+            return redirect()->back()->withErrors('系统异常,文章发布失败');
+        }
+
+        if ($request->has('tags')) {
+            $this->getArticleTagService()->store($article->id, $request->tags);
+        }
+
+        return  redirect('backend/article')
+        ->with('success', '文章添加成功');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        $article = $this->article->find($id);
+
+        $article->fill($this->basicFields($request));
+        if (!$article->save()) {
+            return redirect()->back()->withErrors('修改文章失败');
+        }
+
+        $this->getArticleTagService()->updateArticleTags($id, $request->tags);
+
+        return redirect('backend/article')
+            ->with('success', '文章修改成功');
+
+    }
+
+    public function edit($id)
+    {
+        $article = $this->article->find($id);
+        $tags = $article->articleTag;
+        $tagIdList = $this->getArticleTagService()->tagsIdList($tags, false);
+        return compact('article', 'tagIdList');
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destory($id)
+    {
+        $article = $this->article->find($id);
+
+        if (!$article->delete()) {
+            return response()->json(['status' => 1]);
+        }
+
+        return response()->json(['status' => 0]);
+    }
+
+    private function getArticleTagService()
+    {
+        return app('App\Services\ArticleTagService');
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function basicFields(Request $request)
+    {
+        return array_merge($request->intersect([
+            'title',
+            'keyword',
+            'desc',
+            'cate_id',
+            'user_id'
+        ]), [
+            'content' => $request->get('markdown-content'),
+            'html_content' => $request->get('html-conent')
+        ]);
     }
 }
