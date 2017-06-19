@@ -40,7 +40,7 @@ class ArticlePresenter extends FractalPresenter
     {
         return $this->article
             ->orderBy('read_count', 'desc')
-            ->paginate(5, [
+            ->paginate(10, [
                 'id',
                 'title',
                 'read_count'
@@ -49,10 +49,10 @@ class ArticlePresenter extends FractalPresenter
 
     public function formatTitle($title)
     {
-        if (strlen($title) <= 20) {
+        if (strlen($title) <= 25) {
             return $title;
         } else {
-            return mb_substr($title, 0, 19, 'utf-8')."...";
+            return mb_substr($title, 0, 25, 'utf-8')."...";
         }
     }
 }

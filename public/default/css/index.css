@@ -18,6 +18,7 @@
     background-color: transparent;
 }
 
+
 .navbar-static-top {
     border-width: 0 0 0;
 }
@@ -58,6 +59,7 @@
 
 .article-list .info {
     margin-top:25px;
+    color:#3D93A3;
 }
 .icon-github {
     background: url('/default/icons/github.png') no-repeat;
@@ -90,5 +92,5 @@
 
 
 a {
-    color:#3D93A3;
+    color: #34495e;
 }
