@@ -10,7 +10,6 @@ use App\Repositories\CategoryRepositoryEloquent;
 use App\Http\Requests\Backend\Category\CreateRequest;
 use App\Http\Requests\Backend\Category\UpdateRequest;
 use App\Repositories\NavigationRepositoryEloquent;
-use Mockery\CountValidator\Exception;
 
 class CategoryController extends Controller
 {
@@ -51,10 +50,12 @@ class CategoryController extends Controller
     public function store(CreateRequest $request)
     {
         $result = $this->category->store($request->all());
+        
         if ($result) {
             return redirect('backend/category')->with('success', '分类添加成功');
         }
-        return redirect(route('backend.category.create'))->withErrors('系统异常，分类添加失败');
+        
+        return redirect(route('backend.category.create'))->withErrors('分类添加失败');
     }
 
     /**
@@ -81,20 +82,21 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequest $request, $id)
     {
-
         $result = $this->category->update($request->all(), $id);
+
         if ($result) {
             return redirect('backend/category')->with('success', '分类修改成功');
         }
-        return redirect(route('backend.category.edit', ['id' => $id]))->withErrors('系统异常，分类修改失败');
+
+        return redirect(route('backend.category.edit', ['id' => $id]))->withErrors('分类修改失败');
     }
 
     /**
@@ -114,19 +116,16 @@ class CategoryController extends Controller
     /**
      * @param $id
      * @param NavigationRepositoryEloquent $nav
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function setNavigation($id, NavigationRepositoryEloquent $nav)
     {
-        try {
-            $category = $this->category->find($id);
-            if ($nav->setCategoryNav($category->id, $category->name)) {
-                return redirect()->back()->with('success', '设置成功');
-            }
-            throw new Exception('设置失败');
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-            return redirect()->back()->withErrors($e->getMessage());
+        $category = $this->category->find($id);
+
+        if ($nav->setCategoryNav($category->id, $category->name)) {
+            return redirect()->back()->with('success', '设置成功');
         }
+
+        return redirect()->back()->withErrors('失败');
     }
 }

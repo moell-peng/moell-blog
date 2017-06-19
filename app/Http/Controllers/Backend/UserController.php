@@ -108,9 +108,6 @@ class UserController extends Controller
     public function update(UpdateRequest $request, $id, ImageUploads $imageUploads)
     {
         $user = $this->user->find($id);
-        if (!$user) {
-            return redirect(route('backend.user.edit'))->back()->withErrors('非法参数或者用户不存在');
-        }
 
         if ($request->hasFile('user_pic')) {
             $file = $request->file('user_pic');
@@ -145,11 +142,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->user->find($id)) {
-            if ($this->user->delete($id)) {
-                return response()->json(['status' => 0]);
-            }
+        if ($this->user->delete($id)) {
+            return response()->json(['status' => 0]);
         }
+
         return response()->json(['status' => 1]);
     }
 }

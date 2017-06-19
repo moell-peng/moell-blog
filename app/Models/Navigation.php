@@ -12,4 +12,9 @@ class Navigation extends Model implements Transformable
 
     protected $fillable = ['name','url','sequence','state', 'article_cate_id', 'nav_type'];
 
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category', 'article_cate_id', 'id');
+    }
+
 }

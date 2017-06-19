@@ -54,7 +54,8 @@ class TagController extends Controller
             return redirect('backend/tag')
                 ->with('success', '标签添加成功');
         }
-        return redirect(route('backend.tag.create'))->withErrors('系统异常，标签添加失败');
+
+        return redirect(route('backend.tag.create'))->withErrors('标签添加失败');
     }
 
     /**
@@ -89,18 +90,16 @@ class TagController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $tag = $this->tag->find($id);
-        if ($tag) {
-            $data = [];
-            $data['tag_name'] = $request->name;
-            if ($this->tag->update($data, $id)) {
-                return redirect('backend/tag')
-                    ->with('success', '标签修改成功');
-            }
+        $data = [];
+        $data['tag_name'] = $request->name;
+        if ($this->tag->update($data, $id)) {
+            return redirect('backend/tag')
+                ->with('success', '标签修改成功');
         }
+
         return redirect()
             ->back()
-            ->withErrors('系统异常，标签修改失败');
+            ->withErrors('标签修改失败');
     }
 
     /**
@@ -111,11 +110,10 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->tag->find($id)) {
-            if ($this->tag->delete($id)) {
-                return response()->json(['status' => 0]);
-            }
+        if ($this->tag->delete($id)) {
+            return response()->json(['status' => 0]);
         }
+
         return response()->json(['status' => 1]);
     }
 }

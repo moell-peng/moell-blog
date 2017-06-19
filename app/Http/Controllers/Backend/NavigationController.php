@@ -26,7 +26,10 @@ class NavigationController extends Controller
      */
     public function index()
     {
-        $navigations = $this->navigation->orderBy('sequence', 'desc')->all();
+        $navigations = $this->navigation->with([
+            'category'
+        ])->orderBy('sequence', 'desc')->all();
+
         return view('backend.navigation.index', compact('navigations'));
     }
 
@@ -51,6 +54,7 @@ class NavigationController extends Controller
         if ($this->navigation->create($request->all())) {
             return redirect('backend/navigation')->with('success', '导航添加成功');
         }
+
         return redirect()->back()->withErrors('系统异常,导航添加失败');
     }
 
@@ -74,9 +78,8 @@ class NavigationController extends Controller
     public function edit($id)
     {
         $navigation = $this->navigation->find($id);
-        if ($navigation) {
-            return view('backend.navigation.edit', compact('navigation'));
-        }
+
+        return view('backend.navigation.edit', compact('navigation'));
     }
 
     /**
@@ -91,6 +94,7 @@ class NavigationController extends Controller
         if ($this->navigation->update($request->all(), $id)) {
             return redirect('backend/navigation')->with('success', '导航修改成功');
         }
+
         return redirect()->back()->withErrors('系统异常,修改导航失败');
     }
 
@@ -102,12 +106,10 @@ class NavigationController extends Controller
      */
     public function destroy($id)
     {
-        $navigation = $this->navigation->find($id);
-        if ($navigation) {
-            if ($this->navigation->delete($id)) {
-                return response()->json(['status' => 0]);
-            }
+        if ($this->navigation->delete($id)) {
+            return response()->json(['status' => 0]);
         }
+
         return response()->json(['status' => 1]);
     }
 }

@@ -27,6 +27,7 @@ class PageController extends Controller
     public function index()
     {
         $pages = $this->page->all();
+
         return view('backend.page.index', compact('pages'));
     }
 
@@ -102,12 +103,10 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        $page = $this->page->find($id);
-        if ($page) {
-            if ($this->page->delete($id)) {
-                return response()->json(['status' => 0]);
-            }
+        if ($this->page->delete($id)) {
+            return response()->json(['status' => 0]);
         }
+        
         return response()->json(['status' => 1]);
     }
 }

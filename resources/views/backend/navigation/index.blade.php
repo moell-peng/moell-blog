@@ -60,8 +60,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($navigation->article_cate_id > 0)
-                                            {{ $articleCategory->getIdName($navigation->article_cate_id) }}
+                                        @if ($navigation->category)
+                                            {{ $navigation->category->name }}
                                         @endif
                                     </td>
                                     <td>

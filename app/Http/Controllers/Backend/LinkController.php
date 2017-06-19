@@ -51,6 +51,7 @@ class LinkController extends Controller
         if ($this->link->create($request->all())) {
             return redirect('backend/link')->with('success', '友情链接添加成功');
         }
+
         return redirect()->back()->withErrors('系统异常，友情链接添加失败');
     }
 
@@ -86,13 +87,11 @@ class LinkController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $link = $this->link->find($id);
-        if ($link) {
-            if ($this->link->update($request->all(), $id)) {
-                return redirect('backend/link')->with('success', '友情链接添加成功');
-            }
+        if ($this->link->update($request->all(), $id)) {
+            return redirect('backend/link')->with('success', '友情链接添加成功');
         }
-        return redirect()->back()->withErrors('系统异常，修改友情链接失败');
+
+        return redirect()->back()->withErrors('修改友情链接失败');
     }
 
     /**
@@ -103,11 +102,10 @@ class LinkController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->link->find($id)) {
-            if ($this->link->delete($id)) {
-                return response()->json(['status' => 0]);
-            }
+        if ($this->link->delete($id)) {
+            return response()->json(['status' => 0]);
         }
+
         return response()->json(['status' => 1]);
     }
 }
