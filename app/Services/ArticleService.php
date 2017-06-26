@@ -129,7 +129,7 @@ class ArticleService
             'user_id'
         ]), [
             'content' => $request->get('markdown-content'),
-            'html_content' => $request->get('html-conent')
+            'html_content' => $request->get('html-content')
         ]);
     }
 }
