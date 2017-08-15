@@ -12,9 +12,9 @@
     <div class="text-inner">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="to-animate fadeInUp animated color-white">
+                <h3 class="to-animate fadeInUp animated color-white">
                     {{ $systemPresenter->getKeyValue('motto') }}
-                </h2>
+                </h3>
             </div>
         </div>
     </div>

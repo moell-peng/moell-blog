@@ -5,6 +5,10 @@
     background-color: #3D93A3;
 }
 
+.navbar-default, .jumbotron a{
+    color: white;
+}
+
 .navbar-default .navbar-nav>li>a {
     color: white;
 }
@@ -42,7 +46,7 @@
 }
 
 .article-list {
-    padding-left: 0px;
+    padding-left: 0;
     list-style: none;
 }
 
@@ -59,7 +63,6 @@
 
 .article-list .info {
     margin-top:25px;
-    color:#3D93A3;
 }
 .icon-github {
     background: url('/default/icons/github.png') no-repeat;
