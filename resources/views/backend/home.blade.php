@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', 'Moell Blog')
+@section('title', 'Fenglei Blog')
 
 @section('header')
     <h1>
         Home
-        <small>Moell Blog</small>
+        <small>Feng Lei Blog</small>
     </h1>
 @endsection
 
@@ -16,53 +16,36 @@
         }
     </style>
     <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-solid" style="padding: 10px;">
-                <h3>欢迎使用Moell Blog!</h3>
-                <strong>简介</strong>
-                <p> Moell Blog 是一个基于Laravel开发，支持markdown语法开源的简易博客。</p>
-                <strong>开发者信息</strong>
-                <p>Name : moell</p>
-                <p>Email : moell91@foxmail.com</p>
-                <p>博客地址 : <a href="http://moell.cn" target="_blank">moell</a></p>
-                <p>项目地址 : <a href="https://github.com/moell-peng/moell-blog" target="_blank">Github</a></p>
-
-                <strong>依赖开源程序</strong>
-                <ul>
-                    <li>LAMP</li>
-                    <li>
-                        <a href="https://laravel.com/" target="_blank">Laravel</a>
-                    </li>
-                    <li>
-                        <a href="https://www.almsaeedstudio.com" target="_blank">
-                            AdminLTE
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://getbootstrap.com/" target="_blank">
-                            Bootstrap
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://pandao.github.io/editor.md/examples/index.html" target="_blank">
-                            Editor.md
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/andersao/l5-repository" target="_blank">
-                            andersao/l5-repository
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/etrepat/baum" target="_blank">
-                            etrepat/baum
-                        </a>
-                    </li>
-                </ul>
-                <strong>关于问题反馈</strong>
-                <p>
-                    可以发送Email,或者在Github上反馈遇到的问题,看到后会逐一帮助解决问题，务必将问题描述清楚。
-                </p>
+        <div class="col-md-12">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">系统信息</h3>
+                </div>
+                <div class="box-body table-responsive">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td>服务器域名： {{ $systemInfo['hostName'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>PHP版本： {{ $systemInfo['phpVersion'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>服务器端信息：{{ $systemInfo['runOS'] }}/{{ $systemInfo['serverInfo'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>最大上传限制：{{ $systemInfo['maxUploadSize'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td>最大执行时间：{{ $systemInfo['maxExecutionTime'] }} seconds</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
