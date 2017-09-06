@@ -51,6 +51,15 @@
     </div>
 
     <div id="share" class="social-share m-t-25"></div>
+    <!--PC版-->
+    <div id="SOHUCS" sid="{{$article->id}}"></div>
+    <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+    <script type="text/javascript">
+        window.changyan.api.config({
+            appid: 'cytc1F6Fo',
+            conf: 'prod_addae95c4b367221acec9d5c64ba3008'
+        });
+    </script>
     <!-- 评论插件 -->
     @include('default.comment.index', [
         'commentId' => $article->id,
