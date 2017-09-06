@@ -4,7 +4,7 @@
         <?php $navigations = $navPresenter->simpleNavList(); ?>
         @if ($navigations)
             @foreach ($navigations as $navigation)
-                    <li><a href="{{ $navigation->url }}" target="_blank"><span>{{ $navigation->name }}</span></a></li>
+                    <li><a href="{{ $navigation->url }}"><span>{{ $navigation->name }}</span></a></li>
             @endforeach
         @endif
     </ul>
