@@ -14,7 +14,7 @@ class UploadController extends  Controller
             && $request->file('file')->isValid()
             && in_array($request->file->extension(), ["png", "jpg", "jpeg", "gif"])
         ) {
-            $path = $request->file->store(date('Ym-d'), config('blog.disk'));
+            $path = $request->file->store(date('Ymd'), config('blog.disk'));
 
             $url = Storage::disk(config('blog.disk'))->url($path);
 
