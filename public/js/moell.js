@@ -1,6 +1,6 @@
 var Moell = window.Moell || {};
 
-var _token = $("meta[name='_token']").attr('content');
+var _token = $("meta[name='csrf-token']").attr('content');
 
 (function(Moell) {
     Moell.ajax = {

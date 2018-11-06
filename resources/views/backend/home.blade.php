@@ -17,10 +17,7 @@
     </style>
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-solid" style="padding: 10px;">
-                <h3>欢迎使用Moell Blog!</h3>
-                <strong>简介</strong>
-                <p> Moell Blog 是一个基于Laravel开发，支持markdown语法开源的简易博客。</p>
+            <div class="box box-solid" style="padding: 20px;">
                 <strong>开发者信息</strong>
                 <p>Name : moell</p>
                 <p>Email : moell91@foxmail.com</p>
@@ -44,13 +41,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://pandao.github.io/editor.md/examples/index.html" target="_blank">
-                            Editor.md
+                        <a href="https://github.com/erusev/parsedown" target="_blank">
+                            erusev/parsedown
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/andersao/l5-repository" target="_blank">
-                            andersao/l5-repository
+                        <a href="https://github.com/sparksuite/simplemde-markdown-editor" target="_blank">
+                            SimpleMDE - Markdown Editor
                         </a>
                     </li>
                     <li>

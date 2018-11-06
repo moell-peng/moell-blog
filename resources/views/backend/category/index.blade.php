@@ -35,7 +35,7 @@
                             @foreach($category as $id => $cate_name)
                                 <tr>
                                     <td>{{ $line }}</td>
-                                    <td>{{ $cate_name }}</td>
+                                    <td>{!! $cate_name  !!} </td>
                                     <td>
                                         <a href='{{ route("backend.category.edit", ["id" => $id]) }}' class='btn btn-info btn-xs'>
                                             <i class="fa fa-pencil"></i> 修改</a>

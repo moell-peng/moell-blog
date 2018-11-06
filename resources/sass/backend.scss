@@ -1,0 +1,31 @@
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css';
+
+@import '~admin-lte/bower_components/font-awesome/css/font-awesome.min.css';
+
+@import '~admin-lte/bower_components/Ionicons/css/ionicons.min.css';
+
+@import '~admin-lte/dist/css/AdminLTE.min.css';
+
+@import '~admin-lte/dist/css/skins/_all-skins.min.css';
+
+@import '~admin-lte/plugins/iCheck/square/blue.css';
+
+@import '~bootstrapvalidator/dist/css/bootstrapValidator.min.css';
+
+/*@import '~simplemde/dist/simplemde.min.css';
+
+@import '~highlight.js/styles/solarized-dark.css';*/
+
+.markdown-editor {
+  padding: 15px;
+
+  .CodeMirror-fullscreen, .editor-toolbar.fullscreen {
+    z-index:2000;
+  }
+}
+
+

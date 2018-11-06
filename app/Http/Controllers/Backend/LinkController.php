@@ -2,22 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Link\CreateRequest;
 use App\Http\Requests\Backend\Link\UpdateRequest;
-use App\Repositories\LinkRepositoryEloquent;
+use App\Models\Link;
 
 class LinkController extends Controller
 {
-    protected $link;
-
-    public function __construct(LinkRepositoryEloquent $link)
-    {
-        $this->link = $link;
-    }
 
     /**
      * Display a listing of the resource.
@@ -26,7 +17,8 @@ class LinkController extends Controller
      */
     public function index()
     {
-        $links = $this->link->all();
+        $links = Link::all();
+
         return view('backend.link.index', compact('links'));
     }
 
@@ -43,16 +35,14 @@ class LinkController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateRequest $request)
     {
-        if ($this->link->create($request->all())) {
-            return redirect('backend/link')->with('success', '友情链接添加成功');
-        }
+        Link::create($request->all());
 
-        return redirect()->back()->withErrors('系统异常，友情链接添加失败');
+        return redirect()->route('backend.link.index')->with('success', '友情链接添加成功');
     }
 
     /**
@@ -74,24 +64,26 @@ class LinkController extends Controller
      */
     public function edit($id)
     {
-        $link = $this->link->find($id);
+        $link = Link::find($id);
+
         return view('backend.link.edit', compact('link'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequest $request, $id)
     {
-        if ($this->link->update($request->all(), $id)) {
-            return redirect('backend/link')->with('success', '友情链接添加成功');
-        }
+        $link = Link::findOrFail($id);
 
-        return redirect()->back()->withErrors('修改友情链接失败');
+        $link->fill($request->all());
+        $link->save();
+
+        return redirect()->route('backend.link.index')->with('success', '友情链接修改成功');
     }
 
     /**
@@ -102,10 +94,6 @@ class LinkController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->link->delete($id)) {
-            return response()->json(['status' => 0]);
-        }
-
-        return response()->json(['status' => 1]);
+        return Link::destroy($id) ? response()->json(['status' => 0]) : response()->json(['status' => 0]);
     }
 }

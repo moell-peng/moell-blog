@@ -2,23 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Page\CreateRequest;
 use App\Http\Requests\Backend\Page\UpdateRequest;
-use App\Repositories\PageRepositoryEloquent;
+use App\Models\Page;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    protected $page;
-
-    public function __construct(PageRepositoryEloquent $page)
-    {
-        $this->page = $page;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +17,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pages = $this->page->all();
+        $pages = Page::all();
 
         return view('backend.page.index', compact('pages'));
     }
@@ -44,16 +35,14 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateRequest $request)
     {
-        if ($this->page->create($request->all())) {
-            return redirect('backend/page')->with('success', '创建成功');
-        }
+        Page::create($this->basicFields($request));
 
-        return redirect()->back()->withErrors('创建失败');
+        return redirect()->route('backend.page.index')->with('success', '创建成功');
     }
 
     /**
@@ -75,24 +64,33 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        $page = $this->page->find($id);
+        $page = Page::findOrFail($id);
+
         return view('backend.page.edit', compact('page'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequest $request, $id)
     {
-        if ($this->page->update($request->all(), $id)) {
-            return redirect('backend/page')->with('success', '修改成功');
-        }
+        $page = Page::findOrFail($id);
 
-        return redirect()->back()->withErrors('修改失败');
+        $page->fill($this->basicFields($request));
+        $page->save();
+
+        return redirect()->route('backend.page.index')->with('success', '修改成功');
+    }
+
+    private function basicFields(Request $request)
+    {
+        $html = $html = (new \Parsedown())->parse($request->get('content'));
+
+        return array_merge($request->all(), ['html_content' => $html]);
     }
 
     /**
@@ -103,10 +101,6 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->page->delete($id)) {
-            return response()->json(['status' => 0]);
-        }
-        
-        return response()->json(['status' => 1]);
+        return Page::destroy($id) ? response()->json(['status' => 0]) : response()->json(['status' => 1]);
     }
 }

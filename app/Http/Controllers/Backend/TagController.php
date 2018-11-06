@@ -2,23 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\TagRepositoryEloquent;
 use App\Http\Requests\Backend\Tag\CreateRequest;
 use App\Http\Requests\Backend\Tag\UpdateRequest;
+use App\Models\Tag;
 
 class TagController extends Controller
 {
-    protected $tag;
-
-    public function __construct(TagRepositoryEloquent $tag)
-    {
-        $this->tag = $tag;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +16,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = $this->tag->paginate(15);
+        $tags = Tag::latest()->paginate();
+
         return view('backend.tag.index', compact('tags'));
     }
 
@@ -43,19 +34,14 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateRequest $request)
     {
-        $data = [];
-        $data['tag_name'] = $request->name;
-        if ($this->tag->create($data)) {
-            return redirect('backend/tag')
-                ->with('success', '标签添加成功');
-        }
+        Tag::create(['tag_name' => $request->name]);
 
-        return redirect(route('backend.tag.create'))->withErrors('标签添加失败');
+        return redirect()->route('backend.tag.index')->with('success', '标签添加成功');
     }
 
     /**
@@ -77,29 +63,26 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tag = $this->tag->find($id);
+        $tag = Tag::findOrFail($id);
+
         return view("backend.tag.edit", compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequest $request, $id)
     {
-        $data = [];
-        $data['tag_name'] = $request->name;
-        if ($this->tag->update($data, $id)) {
-            return redirect('backend/tag')
-                ->with('success', '标签修改成功');
-        }
+        $tag = Tag::findOrFail($id);
 
-        return redirect()
-            ->back()
-            ->withErrors('标签修改失败');
+        $tag->tag_name = $request->name;
+        $tag->save();
+
+        return redirect()->route('backend.tag.index')->with('success', '标签修改成功');
     }
 
     /**
@@ -110,10 +93,6 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->tag->delete($id)) {
-            return response()->json(['status' => 0]);
-        }
-
-        return response()->json(['status' => 1]);
+        return Tag::destroy($id) ? response()->json(['status' => 0]) : response()->json(['status' => 1]);
     }
 }

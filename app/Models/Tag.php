@@ -3,13 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
 
-class Tag extends Model implements Transformable
+class Tag extends Model
 {
-    use TransformableTrait;
-
     protected $fillable = ['tag_name', 'article_number'];
 
     protected $table = 'tags';

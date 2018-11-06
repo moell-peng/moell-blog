@@ -2,30 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Repositories\PageRepositoryEloquent;
-use App\Services\PageService;
+use App\Models\Page;
 
 class PageController extends Controller
 {
-    protected $page;
-
-    protected $pageService;
-
-    public function __construct(PageRepositoryEloquent $page, PageService $pageService)
-    {
-        $this->page = $page;
-        $this->pageService = $pageService;
-    }
-
     /**
      * @param $alias
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index($alias)
     {
-        $page = $this->pageService->getAliasInfo($alias);
+        $page  = Page::where('link_alias', $alias)->first();
+
         if (!$page) {
             abort('404');
         }
@@ -33,13 +22,11 @@ class PageController extends Controller
         return view('default.show_page', compact('page'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function about()
     {
-        $page = $this->page->getAliasInfo('about');
-        if (!$page) {
-            abort(404);
-        }
-
-        return view('default.show_page', compact('page'));
+        return $this->index('about');
     }
 }

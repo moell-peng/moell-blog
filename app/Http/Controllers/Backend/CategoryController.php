@@ -2,23 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Models\Category;
+use App\Models\Navigation;
 use App\Http\Controllers\Controller;
-use App\Repositories\CategoryRepositoryEloquent;
 use App\Http\Requests\Backend\Category\CreateRequest;
 use App\Http\Requests\Backend\Category\UpdateRequest;
-use App\Repositories\NavigationRepositoryEloquent;
 
 class CategoryController extends Controller
 {
-    protected $category;
-
-    public function __construct(CategoryRepositoryEloquent $category)
-    {
-        $this->category = $category;
-    }
 
     /**
      * Display a listing of the resource.
@@ -27,7 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = $this->category->getNestedList();
+        $category = Category::getNestedList('name', null, '&nbsp;&nbsp;&nbsp;&nbsp;');
+
         return view("backend.category.index", compact('category'));
     }
 
@@ -42,20 +34,16 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateRequest $request)
     {
-        $result = $this->category->store($request->all());
-        
-        if ($result) {
-            return redirect('backend/category')->with('success', '分类添加成功');
-        }
-        
-        return redirect(route('backend.category.create'))->withErrors('分类添加失败');
+        !$request->cate_id
+            ? Category::create(['name' => $request->name])
+            : Category::find($request->cate_id)->children()->create(['name' => $request->name]);
+
+        return redirect(route('backend.category.index'))->with('success', '添加成功');
     }
 
     /**
@@ -77,7 +65,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = $this->category->find($id);
+        $category = Category::find($id);
+
         return view('backend.category.edit', compact('category'));
     }
 
@@ -90,13 +79,21 @@ class CategoryController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $result = $this->category->update($request->all(), $id);
 
-        if ($result) {
-            return redirect('backend/category')->with('success', '分类修改成功');
+        $category = Category::findOrFail($id);
+
+        $category->name = $request->name;
+        $category->save();
+
+        if ($request->cate_id != 0 && $category->parent_id != $request->cate_id) {
+            $parent = Category::findOrFail($request->cate_id);
+
+            $category->makeChildOf($parent);
+        } else {
+            $category->makeRoot();
         }
 
-        return redirect(route('backend.category.edit', ['id' => $id]))->withErrors('分类修改失败');
+        return redirect(route('backend.category.index'))->with('success', '分类修改成功');
     }
 
     /**
@@ -107,25 +104,29 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->category->delete($id)) {
-            return response()->json(['status' => 0]);
-        }
-        return response()->json(['status' => 1]);
+        return Category::destroy($id) ? response()->json(['status' => 0]) : response()->json(['status' => 1]);
     }
 
     /**
      * @param $id
-     * @param NavigationRepositoryEloquent $nav
-     * @return \Illuminate\Http\RedirectResponse
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function setNavigation($id, NavigationRepositoryEloquent $nav)
+    public function setNavigation($id)
     {
-        $category = $this->category->find($id);
+        $category = Category::findOrFail($id);
 
-        if ($nav->setCategoryNav($category->id, $category->name)) {
-            return redirect()->back()->with('success', '设置成功');
+        if (Navigation::query()->where('article_cate_id', $category->id)->count()) {
+            return redirect()->back()->withErrors('当前分类已存在导航');
         }
 
-        return redirect()->back()->withErrors('失败');
+        Navigation::create([
+            'article_cate_id' => $category->id,
+            'nav_type' => 1,
+            'name' => $category->name,
+            'url' => route('category', ['id' => $category->id]),
+            'sequence' => 0
+        ]);
+
+        return redirect()->back()->with('success', '设置成功');
     }
 }

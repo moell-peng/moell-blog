@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Repositories\ArticleRepositoryEloquent;
 
 class SearchController extends Controller
 {
-    public function index(Request $request, ArticleRepositoryEloquent $articleRepo)
+    public function index(Request $request)
     {
-        $articles = $articleRepo->searchKeywordArticle($request->keyword);
+        $articles = Article::where('title', 'like', "%{ $request->keyword }%")->paginate();
+
         return view('default.search_article', compact('articles'));
     }
 }

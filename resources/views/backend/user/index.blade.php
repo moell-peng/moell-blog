@@ -32,13 +32,13 @@
                             <th>邮箱</th>
                             <th>操作</th>
                         </tr>
-                        @if ($user)
+                        @if ($users)
                             <?php $line = 1  ?>
-                            @foreach($user as $u)
+                            @foreach($users as $u)
                                 <tr>
                                     <td>{{ $line }}</td>
                                     <td>
-                                        <img src="{{ asset('uploads/avatar') }}/{{ $u['user_pic'] }}" class="img-circle" style="width:30px;height:auto;">
+                                        <img src="{{  $u['user_pic'] }}" class="img-circle" style="width:30px;height:auto;">
                                     </td>
                                     <td>{{ $u['name'] }}</td>
                                     <td>{{ $u['email'] }}</td>

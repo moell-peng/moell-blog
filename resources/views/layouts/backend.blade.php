@@ -3,25 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="_token" content="{{ csrf_token() }}"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="{{ asset('AdminLTE/bootstrap/css/bootstrap.min.css') }}">
-    <!-- Font Awesome -->
-    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">--}}
-    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Ionicons -->
-    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">--}}
-    <link href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/AdminLTE.min.css') }}">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/skins/_all-skins.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('bootstrapvalidator/dist/css/bootstrapValidator.min.css') }}" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+
+    <link rel="stylesheet" href="{{ mix('css/backend.css') }}">
 
     @yield('stylesheet')
 
@@ -47,9 +38,9 @@
             <span class="logo-lg"><b>Moell</b>&nbsp;Blog</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
+        <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
 
@@ -58,13 +49,13 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('uploads/avatar')."/".Auth::user()->user_pic }}" class="user-image" alt="User Image">
+                            <img src="{{ Auth::user()->user_pic }}" class="user-image" alt="User Image">
                             <span class="hidden-xs"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{ asset('uploads/avatar')."/".Auth::user()->user_pic }}" class="img-circle" alt="User Image">
+                                <img src="{{ Auth::user()->user_pic }}" class="img-circle" alt="User Image">
 
                                 <p>
                                     Moell Blog - 做努力的自己
@@ -94,14 +85,14 @@
             @inject('backendPresenter', 'App\Presenters\BackendPresenter')
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ asset('uploads/avatar')."/".Auth::user()->user_pic }}" class="img-circle" alt="User Image">
+                    <img src="{{ Auth::user()->user_pic }}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-            <ul class='sidebar-menu'>
+            <ul class='sidebar-menu' data-widget="tree">
                 {!! $backendPresenter->menu()  !!}
             </ul>
         </section>
@@ -127,23 +118,13 @@
     </footer>
 </div>
 <!-- ./wrapper -->
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
-<!-- jQuery 2.2.0 -->
-<script src="{{ asset('AdminLTE/plugins/jQuery/jQuery-2.2.0.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
 
-<!-- Bootstrap 3.3.6 -->
-<script src="{{ asset('AdminLTE/bootstrap/js/bootstrap.min.js') }}"></script>
-
-<!-- AdminLTE App -->
-<script src="{{ asset('AdminLTE/dist/js/app.min.js') }}"></script>
+<script src="{{ mix('js/backend.js') }}" ></script>
 
 <script src="{{ asset('layer/layer.js') }}" ></script>
-
-<script src="{{ asset('bootstrapvalidator/dist/js/bootstrapValidator.min.js') }}" ></script>
-
-<script src="{{ asset('js/moell.js') }}" ></script>
-
-<script src="{{ asset('js/backend.js') }}" ></script>
 
 @yield('javascript')
 </body>

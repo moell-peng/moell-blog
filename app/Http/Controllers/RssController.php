@@ -2,38 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ArticleRepositoryEloquent;
-use App\Repositories\SystemRepositoryEloquent;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Models\Article;
+use App\Models\System;
 use Rss;
 
 class RssController extends Controller
 {
-    private $article;
-    private $system;
-
-    public function __construct(ArticleRepositoryEloquent $article, SystemRepositoryEloquent $system)
-    {
-        $this->article = $article;
-        $this->system = $system;
-    }
-
     public function index()
     {
-        $title = $this->system->getKeyValue('title');
-        $description = $this->stringFormat($this->system->getKeyValue('seo_desc'));
-
         $channel = [
-            'title' => $title,
+            'title' => System::keyValue('title'),
             'link'  => route('rss'),
-            'description' => $description,
+            'description' => $this->stringFormat(System::keyValue('seo_desc')),
         ];
 
         $rss = Rss::channel($channel);
 
-        $articles = $this->article->orderBy('id', 'desc')->simplePaginate(20);
+        $articles = Article::query()->orderBy('id', 'desc')->simplePaginate(20);
         if ($articles) {
             foreach ($articles as $article) {
                 $item = [

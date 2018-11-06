@@ -2,34 +2,15 @@
 
 namespace App\Presenters;
 
-use App\Repositories\CategoryRepositoryEloquent;
-use App\Transformers\CategoryTransformer;
-use Prettus\Repository\Presenter\FractalPresenter;
+use App\Models\Category;
 
 /**
  * Class CategoryPresenter
  *
  * @package namespace App\Presenters;
  */
-class CategoryPresenter extends FractalPresenter
+class CategoryPresenter
 {
-    protected $category;
-
-    public function __construct(CategoryRepositoryEloquent $category)
-    {
-        $this->category = $category;
-        parent::__construct();
-    }
-
-    /**
-     * Transformer
-     *
-     * @return \League\Fractal\TransformerAbstract
-     */
-    public function getTransformer()
-    {
-        return new CategoryTransformer();
-    }
 
     /**
      * category selects
@@ -40,7 +21,8 @@ class CategoryPresenter extends FractalPresenter
      */
     public function getSelect($defaultCategoryId = 0, $nullText = '请选择', $nullValue = 0)
     {
-        $category = $this->category->getNestedList();
+        $category = Category::getNestedList('name', null, '&nbsp;&nbsp;&nbsp;&nbsp;');
+
         $select = "<select id='cate_id' name='cate_id' class='form-control'>";
         $select .= "<option value='".$nullValue."'>--".$nullText."--</option>";
         if ($category) {

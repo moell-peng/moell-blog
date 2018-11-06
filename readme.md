@@ -1,18 +1,20 @@
 ## Moell Blog
-Moell Blog 是一个基于Laravel5.2开发并支持markdown语法开源的简易博客。
+
+Moell Blog 是一个基于Laravel5.7 开发并支持markdown语法开源的简易博客。
 
 ### 功能
-*  支持Markdown,写文章实时预览效果
+*  支持Markdown, 文章实时预览效果
+*  图片拖拽上传
+*  支持七牛云存储
 *  支持多种编程语言代码高亮
 *  文章搜索
 *  文章分类
 *  文章标签
 *  自定义导航，分类设置为导航
-*  文件管理
 *  友情链接
 *  自定义页面
 *  RSS
-*  评论插件多说,disqus
+*  评论插件 disqus
 
 ### 前端演示地址
 查看 [moell](http://moell.cn "moell")

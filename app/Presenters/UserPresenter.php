@@ -2,38 +2,19 @@
 
 namespace App\Presenters;
 
-use App\Transformers\UserTransformer;
-use Prettus\Repository\Presenter\FractalPresenter;
-use App\Repositories\UserRepositoryEloquent;
+use App\Models\User;
 
 /**
  * Class UserPresenter
  *
  * @package namespace App\Presenters;
  */
-class UserPresenter extends FractalPresenter
+class UserPresenter
 {
-    protected $user;
-
-    public function __construct(UserRepositoryEloquent $user)
-    {
-        $this->user = $user;
-        parent::__construct();
-    }
-
-    /**
-     * Transformer
-     *
-     * @return \League\Fractal\TransformerAbstract
-     */
-    public function getTransformer()
-    {
-        return new UserTransformer();
-    }
-
     public function getUserName($userId)
     {
-        $user = $this->user->find($userId, ['name']);
+        $user = User::where('id', $userId)->first();
+
         if ($user) {
             return $user->name;
         }
@@ -43,9 +24,8 @@ class UserPresenter extends FractalPresenter
         $columns = ['id', 'name', 'user_pic'];
 
         if ($userId > 0) {
-            return $this->user->find($userId, $columns);
+            return User::where("id", $userId)->first($columns);
         }
-        return $this->user->first($columns);
-
+        return User::first($columns);
     }
 }

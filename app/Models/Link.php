@@ -3,13 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
 
-class Link extends Model implements Transformable
+class Link extends Model
 {
-    use TransformableTrait;
-
     protected $fillable = ['name','url','sequence'];
 
 }

@@ -2,31 +2,19 @@
 
 namespace App\Presenters;
 
-use App\Transformers\PageTransformer;
-use Prettus\Repository\Presenter\FractalPresenter;
-
 /**
  * Class PagePresenter
  *
  * @package namespace App\Presenters;
  */
-class PagePresenter extends FractalPresenter
+class PagePresenter
 {
-    /**
-     * Transformer
-     *
-     * @return \League\Fractal\TransformerAbstract
-     */
-    public function getTransformer()
-    {
-        return new PageTransformer();
-    }
-
     /**
      * 获取页面链接地址
      *
      * @param $id
-     * @param string $alias
+     * @param $alias
+     * @return string
      */
     public function getLink($id, $alias)
     {
@@ -35,6 +23,7 @@ class PagePresenter extends FractalPresenter
         }
 
         $alias = $alias != "" ? $alias : $id;
+
         return route('page.show', ['alias' => $alias]);
     }
 }

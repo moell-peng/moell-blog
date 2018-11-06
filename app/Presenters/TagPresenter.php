@@ -2,53 +2,21 @@
 
 namespace App\Presenters;
 
-use App\Transformers\TagTransformer;
-use Prettus\Repository\Presenter\FractalPresenter;
-use App\Repositories\TagRepositoryEloquent;
+use App\Models\Article;
+use App\Models\Tag;
 
 /**
  * Class TagPresenter
  *
  * @package namespace App\Presenters;
  */
-class TagPresenter extends FractalPresenter
+class TagPresenter
 {
-    protected $tag;
-
-    public function __construct(TagRepositoryEloquent $tag)
+    public function tagNameList(Article $article)
     {
-        $this->tag = $tag;
-        parent::__construct();
-    }
-
-    /**
-     * Transformer
-     *
-     * @return \League\Fractal\TransformerAbstract
-     */
-    public function getTransformer()
-    {
-        return new TagTransformer();
-    }
-
-    /**
-     * 获取以;分割的标签
-     *
-     * @param $idList
-     * @return string
-     */
-    public function tagNameList($idList)
-    {
-        $tagName = '';
-        if ($idList != "") {
-            $tags = $this->tag->findWhereIn('id', explode(',', $idList), ['tag_name']);
-            if ($tags) {
-                foreach ($tags as $tag) {
-                    $tagName .= $tag->tag_name.";";
-                }
-            }
-        }
-        return $tagName;
+        $tag = $article->tag()->pluck('tag_name');
+        
+        return $tag ? implode(';', $tag->toArray()) : '';
     }
 
     /**
@@ -58,6 +26,6 @@ class TagPresenter extends FractalPresenter
      */
     public function tagList()
     {
-        return $this->tag->all(['id', 'tag_name']);
+        return Tag::query()->get(['id', 'tag_name']);
     }
 }

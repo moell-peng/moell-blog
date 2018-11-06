@@ -2,10 +2,6 @@
 
 @section('title', '新建页面')
 
-@section('stylesheet')
-    <link rel="stylesheet" href="{{ asset('editor.md/css/editormd.min.css') }}">
-@endsection
-
 @section('header')
     <h1>
         新建页面
@@ -54,9 +50,8 @@
                         </div>
                         <div class="form-group">
                             <label for="content">页面内容</label>
-                            <div id="editormd">
-                                <textarea class="editormd-markdown-textarea" style="display:none;" id="content" name="content"></textarea>
-                                <textarea style="display:none;"  name="html_content"></textarea>
+                            <div class="row markdown-editor">
+                                <textarea  id="markdown-editor" name="content"></textarea>
                             </div>
                         </div>
                     </div>
@@ -77,38 +72,7 @@
 @endsection
 
 @section('javascript')
-    <script src="{{ asset('editor.md/editormd.min.js') }}"></script>
     <script>
-
-        var editor = editormd("editormd", {
-            path        : "{{ asset('/editor.md/lib/') }}/",
-            height  : 500,
-            syncScrolling : "single",
-            toolbarAutoFixed: false,
-            saveHTMLToTextarea : false
-        });
-
-        /* 页面操作验证 */
-        $("#page-form").bootstrapValidator({
-            live: 'disables',
-            message: "This Values is not valid",
-            feedbackIcons: {
-                valid: 'glyphicon ',
-                invalid: 'glyphicon ',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields : {
-                title : {
-                    validators : {
-                        notEmpty : {
-                            message : "页面标题不能为空"
-                        }
-                    }
-                }
-            }
-        }).on('success.form.bv', function(e) {
-            var html = editor.getPreviewedHTML();
-            $("#page-form textarea[name='html_content']").val(html);
-        });
+        markdownEditorInit();
     </script>
 @endsection

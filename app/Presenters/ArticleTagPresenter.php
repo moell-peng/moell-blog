@@ -2,36 +2,18 @@
 
 namespace App\Presenters;
 
-use App\Transformers\ArticleTagTransformer;
-use Prettus\Repository\Presenter\FractalPresenter;
-use App\Repositories\ArticleTagRepositoryEloquent;
+use App\Models\ArticleTag;
 
 /**
  * Class ArticleTagPresenter
  *
  * @package namespace App\Presenters;
  */
-class ArticleTagPresenter extends FractalPresenter
+class ArticleTagPresenter
 {
-    protected $articleTag;
-
-    public function __construct(ArticleTagRepositoryEloquent $articleTag)
-    {
-        $this->articleTag = $articleTag;
-        parent::__construct();
-    }
-    /**
-     * Transformer
-     *
-     * @return \League\Fractal\TransformerAbstract
-     */
-    public function getTransformer()
-    {
-        return new ArticleTagTransformer();
-    }
 
     public function getArticleNumber($tagId)
     {
-        return $this->articleTag->getModel()->where('tag_id', $tagId)->count();
+        return ArticleTag::query()->where('tag_id', $tagId)->count();
     }
 }

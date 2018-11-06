@@ -2,35 +2,15 @@
 
 namespace App\Presenters;
 
-use App\Transformers\ArticleTransformer;
-use Prettus\Repository\Presenter\FractalPresenter;
-use App\Repositories\ArticleRepositoryEloquent;
+use App\Models\Article;
 
 /**
  * Class ArticlePresenter
  *
  * @package namespace App\Presenters;
  */
-class ArticlePresenter extends FractalPresenter
+class ArticlePresenter
 {
-    protected $article;
-
-    public function __construct(ArticleRepositoryEloquent $article)
-    {
-        $this->article = $article;
-        parent::__construct();
-    }
-
-    /**
-     * Transformer
-     *
-     * @return \League\Fractal\TransformerAbstract
-     */
-    public function getTransformer()
-    {
-        return new ArticleTransformer();
-    }
-
     /**
      * 获取热门文章
      *
@@ -38,7 +18,7 @@ class ArticlePresenter extends FractalPresenter
      */
     public function hotArticleList()
     {
-        return $this->article
+        return Article::query()
             ->orderBy('read_count', 'desc')
             ->paginate(8, [
                 'id',

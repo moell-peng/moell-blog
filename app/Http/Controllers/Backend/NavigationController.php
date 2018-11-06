@@ -2,23 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Models\Navigation;
 use App\Http\Controllers\Controller;
-use App\Repositories\NavigationRepositoryEloquent;
 use App\Http\Requests\Backend\Navigation\CreateRequest;
 use App\Http\Requests\Backend\Navigation\UpdateRequest;
 
 class NavigationController extends Controller
 {
-    protected $navigation;
-
-    public function __construct(NavigationRepositoryEloquent $navigation)
-    {
-        $this->navigation = $navigation;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,9 +16,9 @@ class NavigationController extends Controller
      */
     public function index()
     {
-        $navigations = $this->navigation->with([
+        $navigations = Navigation::query()->with([
             'category'
-        ])->orderBy('sequence', 'desc')->all();
+        ])->orderBy('sequence', 'desc')->get();
 
         return view('backend.navigation.index', compact('navigations'));
     }
@@ -46,16 +36,14 @@ class NavigationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateRequest $request)
     {
-        if ($this->navigation->create($request->all())) {
-            return redirect('backend/navigation')->with('success', '导航添加成功');
-        }
+        Navigation::create($request->all());
 
-        return redirect()->back()->withErrors('系统异常,导航添加失败');
+        return redirect()->route('backend.navigation.index')->with('success', '导航添加成功');
     }
 
     /**
@@ -77,7 +65,7 @@ class NavigationController extends Controller
      */
     public function edit($id)
     {
-        $navigation = $this->navigation->find($id);
+        $navigation = Navigation::findOrFail($id);
 
         return view('backend.navigation.edit', compact('navigation'));
     }
@@ -85,17 +73,18 @@ class NavigationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateRequest $request, $id)
     {
-        if ($this->navigation->update($request->all(), $id)) {
-            return redirect('backend/navigation')->with('success', '导航修改成功');
-        }
+        $navigation = Navigation::findOrFail($id);
 
-        return redirect()->back()->withErrors('系统异常,修改导航失败');
+        $navigation->fill($request->all());
+        $navigation->save();
+
+        return redirect()->route('backend.navigation.index')->with('success', '导航修改成功');
     }
 
     /**
@@ -106,10 +95,6 @@ class NavigationController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->navigation->delete($id)) {
-            return response()->json(['status' => 0]);
-        }
-
-        return response()->json(['status' => 1]);
+        return Navigation::destroy($id) ? response()->json(['status' => 0]) : response()->json(['status' => 1]);
     }
 }

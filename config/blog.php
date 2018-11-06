@@ -1,10 +1,7 @@
 <?php
 
 return [
-    'uploads' => [
-        'storage' => 'upload',
-        'webPath' => '/uploads'
-    ],
+    'disk' => env('BLOG_DISK', 'public'),
     'system_key' => [
         'blog_name',
         'motto',
@@ -15,7 +12,6 @@ return [
         'github_url',
         'weibo_url',
         'disqus_short_name',
-        'duoshuo_short_name',
         'comment_plugin',
         'statistics_script'
     ],
@@ -49,12 +45,6 @@ return [
             'backend.tag.index' => [
                 'icon' => 'fa fa-tags',
                 'name' => '标签'
-            ]
-        ],
-        [
-            'backend.upload.index' => [
-                'icon' => 'fa fa-file-image-o',
-                'name' => '文件'
             ]
         ],
         [

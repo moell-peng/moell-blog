@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
@@ -21,7 +20,7 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login / registration.
@@ -29,17 +28,7 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/backend';
-    protected $loginView = 'backend.login';
 
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
-    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -69,5 +58,10 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function showLoginForm()
+    {
+        return view('backend.login');
     }
 }

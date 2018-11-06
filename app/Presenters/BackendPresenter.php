@@ -33,7 +33,7 @@ class BackendPresenter
      */
     private function childrenShow($menu)
     {
-        $string = '<li class="treeview %s">';
+        $string = '<li class="treeview %s" style="line-height:30px;">';
         $string .= ' <a href="#">
                         <i class="'.$menu['tree_title']['icon'].'"></i>
                         <span>'.$menu['tree_title']['name'].'</span>
@@ -66,7 +66,7 @@ class BackendPresenter
     {
         $string = '';
         foreach ($menu as $route => $m) {
-            $string.= "<li class='treeview ".$this->active($route)."'>
+            $string.= "<li class='".$this->active($route)."'>
                 <a href='".route($route)."'>
                     <i class='".$m['icon']."'></i>
                     <span>".$m['name']."</span>

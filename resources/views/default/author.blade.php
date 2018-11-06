@@ -8,7 +8,7 @@
     </div>
     <div class="panel-body">
         <div class="row text-center">
-            <img src="{{ asset('uploads/avatar')."/".$author->user_pic }}" class="img-circle author-avatar" alt="User Image">
+            <img src="{{ $author->user_pic }}" class="img-circle author-avatar" alt="User Image">
         </div>
         <div class="row text-center author-footer">
             <?php

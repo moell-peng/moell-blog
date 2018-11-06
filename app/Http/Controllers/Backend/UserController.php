@@ -2,30 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Repositories\UserRepositoryEloquent;
 use App\Http\Requests\Backend\User\CreateRequest;
 use App\Http\Requests\Backend\User\UpdateRequest;
+use Illuminate\Http\Request;
 use Storage;
-use App\Services\ImageUploads;
 
 class UserController extends Controller
 {
-    protected $user;
-
-    /**
-     * UserController constructor.
-     * @param UserRepositoryEloquent $user
-     */
-    public function __construct(UserRepositoryEloquent $user)
-    {
-        $this->user = $user;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -33,8 +18,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = $this->user->all(['id', 'name', 'email', 'user_pic'])->toArray();
-        return view("backend.user.index", compact('user'));
+        $users = User::all();
+
+        return view("backend.user.index", compact('users'));
     }
 
     /**
@@ -49,30 +35,38 @@ class UserController extends Controller
 
     /**
      * @param CreateRequest $request
-     * @param ImageUploads $imageUploads
      * @return $this
      */
-    public function store(CreateRequest $request, ImageUploads $imageUploads)
+    public function store(CreateRequest $request)
     {
-        if ($request->hasFile('user_pic')) {
-            $file = $request->file('user_pic');
+        $data = [
+            'password' => bcrypt($request->password),
+            'user_pic' => $this->uploadAvatar($request),
+        ];
 
-            $upload = $imageUploads->uploadAvatar($file);
-            if (!$upload['status']) {
-                return redirect()
-                    ->back()
-                    ->withErrors($upload['msg']);
-            }
+        User::create(array_merge($request->all(['name', 'email']), $data));
+
+        return redirect()->route('backend.user.index')->with('success', '用户添加成功');
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    private function uploadAvatar(Request $request)
+    {
+        $url = '';
+
+        if ($request->hasFile('user_pic')
+            && $request->file('user_pic')->isValid()
+            && in_array($request->user_pic->extension(), ["png", "jpg", "jpeg", "gif"])
+        ) {
+            $path = $request->user_pic->store('avatars', config('blog.disk'));
+
+            $url = Storage::disk(config('blog.disk'))->url($path);
         }
 
-        $avatarFileName = isset($upload['fileName']) ? $upload['fileName'] : '';
-
-        if ($this->user->store($request->all(), $avatarFileName)) {
-            return redirect('backend/user')
-                ->with('success', '用户添加成功');
-        }
-
-        return redirect(route('backend.user.create'))->withErrors('系统异常，用户添加失败');
+        return $url;
     }
 
     /**
@@ -94,44 +88,42 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->user->find($id);
+        $user = User::findOrFail($id);
+
         return view("backend.user.edit", compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, $id, ImageUploads $imageUploads)
+    public function update(UpdateRequest $request, $id)
     {
-        $user = $this->user->find($id);
+        $user = User::findOrFail($id);
 
-        if ($request->hasFile('user_pic')) {
-            $file = $request->file('user_pic');
+        $oldAvatarUrl = $user->user_pic;
 
-            $upload = $imageUploads->uploadAvatar($file);
-            if (!$upload['status']) {
-                return redirect()
-                    ->back()
-                    ->withErrors($upload['msg']);
-            }
+        $avatarFileName = $this->uploadAvatar($request);
+
+        if ($avatarFileName) {
+            $data = ['user_pic' => $avatarFileName];
         }
 
-        $avatarFileName = isset($upload['fileName']) ? $upload['fileName'] : '';
-
-        if ($this->user->updateUser($request->all(), $id, $avatarFileName)) {
-            if ($avatarFileName != "" && $user['user_pic'] != "") {
-                Storage::disk('upload')->delete('avatar/'.$user['user_pic']);
-            }
-            return redirect('backend/user')
-                ->with('success', '用户修改成功');
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
         }
-        return redirect()
-            ->back()
-            ->withErrors('用户修改失败');
+
+        $user->fill(array_merge($data, $request->all(['name', 'email'])));
+        $user->save();
+
+        if ($avatarFileName != "" && $oldAvatarUrl != "") {
+            Storage::disk(config('blog.disk'))->delete('avatars/' . basename($oldAvatarUrl));
+        }
+
+        return redirect()->route('backend.user.index')->with('success', '用户修改成功');
     }
 
     /**
@@ -142,10 +134,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->user->delete($id)) {
-            return response()->json(['status' => 0]);
-        }
-
-        return response()->json(['status' => 1]);
+        return User::destroy($id) ? response()->json(['status' => 0]) : response()->json(['status' => 1]);
     }
 }

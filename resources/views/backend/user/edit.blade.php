@@ -22,7 +22,7 @@
                                     <input type="file" name="user_pic" id="user_pic" accept="image/png,image/gif,image/jpeg" >
                                 </div>
                                 <div class='col-md-6'>
-                                    <img src="{{ asset('uploads/avatar') }}/{{ $user->user_pic }}" class="img-circle" style="width:80px;height:auto;">
+                                    <img src="{{ $user->user_pic }}" class="img-circle" style="width:80px;height:auto;">
                                 </div>
                             </div>
                         </div>

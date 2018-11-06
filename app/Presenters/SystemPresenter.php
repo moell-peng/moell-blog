@@ -2,36 +2,21 @@
 
 namespace App\Presenters;
 
-use App\Transformers\SystemTransformer;
-use Prettus\Repository\Presenter\FractalPresenter;
-use App\Repositories\SystemRepositoryEloquent;
+use App\Models\System;
 
 /**
  * Class SystemPresenter
  *
  * @package namespace App\Presenters;
  */
-class SystemPresenter extends FractalPresenter
+class SystemPresenter
 {
-    protected $system;
-
     protected $list;
 
-    public function __construct(SystemRepositoryEloquent $system)
+    public function __construct()
     {
-        $this->system = $system;
-        $this->list = $this->system->optionList();
-        parent::__construct();
-    }
+        $this->list = System::optionList();
 
-    /**
-     * Transformer
-     *
-     * @return \League\Fractal\TransformerAbstract
-     */
-    public function getTransformer()
-    {
-        return new SystemTransformer();
     }
 
     /**
