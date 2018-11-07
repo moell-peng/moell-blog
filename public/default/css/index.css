@@ -93,7 +93,10 @@
     max-width:150px;
 }
 
-
 a {
     color: #34495e;
+}
+
+.markdown-preview img{
+    max-width: 100%;
 }
