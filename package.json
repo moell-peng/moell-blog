@@ -14,11 +14,9 @@
     "bootstrap": "^4.0.0",
     "bootstrapvalidator": "^0.5.4",
     "cross-env": "^5.1",
-    "highlight.js": "^9.13.1",
     "inline-attachment": "^2.0.3",
     "jquery": "^3.2",
     "laravel-mix": "^2.0",
-    "popper.js": "^1.12",
-    "simplemde": "^1.11.2"
+    "popper.js": "^1.12"
   }
 }
