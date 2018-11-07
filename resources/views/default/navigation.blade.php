@@ -9,7 +9,7 @@
         @endif
     </ul>
     <form class="navbar-form navbar-right" action="{{ route('search') }}" method="get">
-        <div class="input-group">
+        <div class="input-group input-group-sm">
             <input type="search" class="search-field form-control" value="" name="keyword" placeholder="Search">
             <span class="input-group-btn">
                 <button type="submit" class="btn btn-default">

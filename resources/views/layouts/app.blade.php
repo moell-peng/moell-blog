@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" href="{{ asset('default/css/index.css') }}">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
 
 </head>
 
@@ -76,6 +77,12 @@
 <!-- Waypoints -->
 
 <script src="{{ asset('default/js/index.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
 
 @yield('script')
 </body>

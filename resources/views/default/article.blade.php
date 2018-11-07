@@ -28,7 +28,6 @@
                     </span>
                 </p>
             </li>
-            <hr/>
         @endforeach
     </ol>
     {!! $articles->links() !!}

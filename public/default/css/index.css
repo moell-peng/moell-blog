@@ -50,19 +50,28 @@
     list-style: none;
 }
 
+.article-list li {
+    padding-bottom: 10px;
+}
+
 .m-t-25 {
     margin-top:25px;
 }
 
 
 .article-list .desc {
-    margin-top:25px;
+    margin-top:15px;
     word-break:break-all;
-    color:#34495e;
+    color:#616161;
 }
 
 .article-list .info {
-    margin-top:25px;
+    margin-top:15px;
+    color:#616161;
+}
+
+.article-list .info span {
+    padding-right: 5px;
 }
 .icon-github {
     background: url('/default/icons/github.png') no-repeat;
@@ -99,4 +108,8 @@ a {
 
 .markdown-preview img{
     max-width: 100%;
+}
+
+pre {
+    padding:0;
 }
