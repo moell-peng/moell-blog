@@ -72,6 +72,7 @@ php artisan db:seed
 
 
 将项目根目录指向入口public目录
+
 **Nginx**
 
 ```shell
