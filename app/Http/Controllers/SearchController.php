@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $articles = Article::where('title', 'like', "%{ $request->keyword }%")->paginate();
+        $articles = Article::where('title', 'like', "%{$request->keyword}%")->paginate();
 
         return view('default.search_article', compact('articles'));
     }

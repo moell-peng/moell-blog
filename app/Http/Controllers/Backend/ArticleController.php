@@ -21,7 +21,7 @@ class ArticleController extends Controller
     {
         $articles = tap(Article::latest(), function ($query) use ($request) {
             if ($request->filled('title')) {
-                $query->where('title', 'like', "%{ $request->title }%");
+                $query->where('title', 'like', "%{$request->title}%");
             }
 
             if ($request->filled('cate_id')) {
