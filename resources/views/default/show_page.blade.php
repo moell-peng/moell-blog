@@ -9,7 +9,6 @@
 @section('keywords', $systemPresenter->checkReturnValue('seo_keyword', $page->keyword))
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('editor.md/css/editormd.preview.min.css') }}">
     <link rel="stylesheet" href="{{ asset('share.js/css/share.min.css') }}">
 @endsection
 
@@ -30,7 +29,7 @@
 @endsection
 
 @section('content')
-    <div class="markdown-body editormd-html-preview" style="padding:0;">
+    <div class="markdown-preview" style="padding:0;">
         {!! $page->html_content !!}
     </div>
 
