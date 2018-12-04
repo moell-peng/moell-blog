@@ -11,8 +11,7 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
 
-        $article->read_count = $article->read_count + 1;
-        $article->save();
+        $article->increment("read_count");
 
         return view('default.show_article', compact('article'));
     }
