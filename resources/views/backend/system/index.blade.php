@@ -79,7 +79,6 @@
                                 <div class='col-md-6'>
                                     <select class='form-control' name="comment_plugin" id="comment_plugin" >
                                         <option value="">请选择</option>
-                                        <option value="duoshuo" {{ $system['comment_plugin'] == 'duoshuo' ? " selected " : "" }}>多说</option>
                                         <option value="disqus" {{ $system['comment_plugin'] == 'disqus' ? " selected " : "" }}>disqus</option>
                                     </select>
                                 </div>
@@ -94,18 +93,6 @@
                                            name="disqus_short_name"
                                            id="disqus_short_name"
                                            placeholder="请输入disqus评论short_name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="duoshuo_short_name">多说评论short_name</label>
-                            <div class="row">
-                                <div class='col-md-6'>
-                                    <input type="text"  value="{{ $system['duoshuo_short_name'] }}"
-                                           class='form-control'
-                                           name="duoshuo_short_name"
-                                           id="duoshuo_short_name"
-                                           placeholder="请输入多说评论short_name">
                                 </div>
                             </div>
                         </div>
